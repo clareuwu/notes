@@ -23,7 +23,7 @@ def create_decks_table(drop = False):
         deckid integer primary key,
         name text unique not null,
         creator text not null,
-        lastedit integer default current_timestamp not null,
+        lastedit integer default (unixepoch()) not null,
         deleted integer default 0 not null,
         foreign key (creator) references users(username)
         );''', 'decks', drop)
@@ -35,7 +35,7 @@ def create_cards_table(drop = False):
         name text unique not null,
         content text not null,
         creator text unique not null,
-        lastedit integer default current_timestamp not null,
+        lastedit integer default (unixepoch()) not null,
         deleted integer default 0 not null,
         datatype text default "text" not null,
         foreign key (creator) references users(username)
@@ -47,8 +47,8 @@ def create_deck_entries_table(drop = False):
     make_table_wrapper('''create table deck_cards(
         dcid integer primary key,
         cardid integer not null,
-        deck integer not null,
-        foreign key (deck) references decks(deckid) on delete cascade,
+        deckid integer not null,
+        foreign key (deckid) references decks(deckid) on delete cascade,
         foreign key (cardid) references cards(cardid) on delete cascade
         );''', 'deck_cards', drop)
 
@@ -61,9 +61,9 @@ con.execute('insert into decks(name, creator) values("test3", "claresies")')
 con.execute('insert into decks(name, creator) values("test4", "claresies")')
 con.execute('insert into decks(name, creator) values("test5", "claresies")')
 con.execute('insert into cards(name, content, creator) values("card1", "Helloooooo!!!", "claresies")')
-con.execute('insert into deck_cards(cardid, deck) values(1, 1)')
-con.execute('insert into deck_cards(cardid, deck) values(1, 2)')
-con.execute('insert into deck_cards(cardid, deck) values(1, 3)')
-con.execute('insert into deck_cards(cardid, deck) values(1, 4)')
-con.execute('insert into deck_cards(cardid, deck) values(1, 5)')
+con.execute('insert into deck_cards(cardid, deckid) values(1, 1)')
+con.execute('insert into deck_cards(cardid, deckid) values(1, 2)')
+con.execute('insert into deck_cards(cardid, deckid) values(1, 3)')
+con.execute('insert into deck_cards(cardid, deckid) values(1, 4)')
+con.execute('insert into deck_cards(cardid, deckid) values(1, 5)')
 con.commit()

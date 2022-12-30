@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime
 import bcrypt
 from flask import Flask, render_template, request, redirect, abort, session
+from models import User, Deck, Card, Deck_Cards
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
 app.secret_key=b'245d0a327be38b04440549727c6a1d06904ed6262e50024359847adef2e97423'
