@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+  <h3 style="text-align: center;" class="col text-capitalize text-center">Login!</h3>
+</div>
+
+<form action="/login" method="post">
+  <label for="username">User</label>
+  <input id="username" type="text" name="username" required>
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" required>
+  <button  style="display:block;margin:auto;margin-top:15px;" type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Notes</title>
+  <link rel="stylesheet" href="s/style.css">
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+</head>
+<body>
+<header>
+  <nav class="header-nav nav">
+    <div class="nav-center">
+      <a href="/">HOME</a>
+    </div>
+  </nav>
+</header>
+<div class="container page-frame">
+  <div class="container page-content">
+    {% block body %}
+    {% endblock %}
+  </div>
+</div>
+
+</body>
+</html>

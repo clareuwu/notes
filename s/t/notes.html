@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+  <h3 class="col text-capitalize">gm {{ session['username'] }}!</h3>
+  <input type="search" placeholder="Search" class="col-3"></input>
+</div>
+
+<button class="">New Deck</button>
+<button class="">New Card</button>
+
+{% for deck in decks %}
+  <div class="cards">
+    <div class="note-card">
+      <header class="card-header">
+        <h4><a href="/d/{{ deck['deckid'] }}">{{ deck['name'] }}</a></h4>
+        <div class="timestamp"><a href="/d/{{ deck['deckid'] }}">/d/{{ deck['deckid'] }}</a> | {{ deck['timestamp'] }}</div>
+        <button class="header-button">Edit</button>
+      </header>
+    </div>
+  </div>
+{% endfor %}
+
+<div style="padding: 5px 0 0 5px; height: 140px; width: 150px;position:fixed;left:0;top:0"></div>
+{% endblock %}
