@@ -1,0 +1,15 @@
+<div class="row">
+  <h3 class="page-title col text-capitalize">{{title}}</h3>
+  <input type="search" placeholder="Search" class="col-3"></input>
+</div>
+
+<button
+  hx-post="/new-deck" hx-swap="none"
+  class="">New Deck</button>
+<button
+  {% if deck %}
+  hx-post="/new-card" hx-target="#base-body" hx-swap="beforeend" class=""
+  {% else %}
+  hx-post="/new-card" hx-swap="none"
+  {% endif %}
+  >New Card</button>

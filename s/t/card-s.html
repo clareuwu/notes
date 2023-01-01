@@ -1,0 +1,14 @@
+<!-- Standalone card for deck pages -->
+<div class="note-card">
+  <header class="card-header">
+    <h4>{{ card.name }}</h4>
+    <div class="card-meta" style="/*! display: flex; *//*! flex-basis: min-content; */">
+      {{ card.isoformat() }}
+      |
+      <a href="/c/{{ card.cardid }}">/c/{{ card.cardid }}</a>
+    </div><button class="header-button">Edit</button>
+  </header>
+  <div class="card">
+    <p>{{ card.content }}</p>
+  </div>
+</div>
