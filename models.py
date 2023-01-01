@@ -84,12 +84,13 @@ class Deck_Cards:
     dcid: int
     cardid: int
     deckid: int
+    order: int
 
     @staticmethod
-    def new(cardid: int, deckid: int):
-        values = (cardid, deckid)
+    def new(cardid: int, deckid: int, order: int):
+        values = (cardid, deckid, order)
         cur = db.cursor()
-        cur.execute('insert into deck_cards(cardid, deckid) values (?,?)', values)
+        cur.execute('insert into deck_cards(cardid, deckid, order) values (?,?,?)', values)
         db.commit()
         id = cur.lastrowid
         cur.close()

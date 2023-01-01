@@ -33,7 +33,7 @@ def home_decks(n: int) -> list:
     """Return first n decks for displaying on notes home page"""
     decks = db.execute('select deckid, name, lastedit from decks order by lastedit desc limit ?', (n,))
     decks = decks.fetchall()
-    decks = [ {'deckid': x[0], 'name': x[1], 'timestamp': datetime.fromtimestamp(x[2])} for x in decks ]
+    decks = [Deck(*row) for row in decks]
     return decks
 
 def auth() -> None:
