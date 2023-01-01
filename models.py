@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Literal
 
 @dataclass
 class User:
@@ -13,7 +14,7 @@ class Deck:
     name: str
     creator: str
     lastedit: int # in unix epoch time
-    deleted: 0 | 1
+    deleted: Literal[0, 1]
 
 @dataclass
 class Card:
@@ -22,8 +23,8 @@ class Card:
     content: str
     creator: str
     lastedit: int # in unix epoch time
-    deleted: 0 | 1
-    datatype: "Text" | "Image"
+    deleted: Literal[0, 1]
+    datatype: Literal["text", "image"]
 
 @dataclass
 class Deck_Cards:

@@ -60,3 +60,15 @@ def get_notes():
     except KeyError:
         abort(401)
     return render_template('notes.html', decks = home_decks(10))
+
+@app.route('/d/<deck>')
+def get_deck():
+    """Handler for GET requests to /d/<deck>.
+    Returns HTML for entire deck contents, including cards and their contents"""
+    pass
+
+@app.route('/c/<card>')
+def get_card():
+    """Handler for GET requests to /c/<card>
+    Return HTML for a single card including contents"""
+    pass
