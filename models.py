@@ -20,7 +20,7 @@ class Deck:
     deleted: Literal[0, 1] = 0
 
     @staticmethod
-    def new(creator):
+    def new(creator: str):
         timestamp = str(int(datetime.now().timestamp()))
         values = ("Untitled "+timestamp, creator)
         cur = db.cursor()
@@ -32,7 +32,7 @@ class Deck:
         return Deck(*row)
 
     @staticmethod
-    def query(deckid):
+    def query(deckid: int):
         row = db.execute('select * from decks where deckid=?', (deckid,)).fetchone()
         return Deck(*row)
 
@@ -55,7 +55,7 @@ class Card:
     datatype: Literal["text", "image"] = "text"
 
     @staticmethod
-    def new(creator):
+    def new(creator: str):
         timestamp = str((datetime.now().timestamp()))
         values = ("Untitled "+timestamp, "", creator)
         cur = db.cursor()
@@ -67,7 +67,7 @@ class Card:
         return Card(*row)
 
     @staticmethod
-    def query(cardid):
+    def query(cardid: int):
         row = db.execute('selected * from cards where cardid=?', (cardid,))
         return Card(*row)
 
@@ -86,7 +86,7 @@ class Deck_Cards:
     deckid: int
 
     @staticmethod
-    def new(cardid, deckid):
+    def new(cardid: int, deckid: int):
         values = (cardid, deckid)
         cur = db.cursor()
         cur.execute('insert into deck_cards(cardid, deckid) values (?,?)', values)
