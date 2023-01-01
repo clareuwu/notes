@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="row">
-  <h3 class="col text-capitalize">gm {{ session['username'] }}!</h3>
-  <input type="search" placeholder="Search" class="col-3"></input>
-</div>
-
-<button class="">New Deck</button>
-<button class="">New Card</button>
-
+{% include "title-bar.html" %}
 {% for deck in decks %}
   <div class="cards">
     <div class="note-card">
       <header class="card-header">
-        <h4><a href="/d/{{ deck['deckid'] }}">{{ deck['name'] }}</a></h4>
-        <div class="timestamp"><a href="/d/{{ deck['deckid'] }}">/d/{{ deck['deckid'] }}</a> | {{ deck['timestamp'] }}</div>
+        <h4>
+          <a href="/d/{{ deck['deckid'] }}">
+            {{ deck['name'] }}
+          </a>
+        </h4>
+        <div class="card-meta">
+          {{ deck['timestamp'] }}
+          |
+          <a href="/d/{{ deck['deckid'] }}">/d/{{ deck['deckid'] }}</a>
+        </div>
         <button class="header-button">Edit</button>
       </header>
     </div>

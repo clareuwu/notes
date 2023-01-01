@@ -1,6 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, astuple
 from datetime import datetime
 from typing import Literal
+import sqlite3
+db = sqlite3.connect('app.db', check_same_thread=False)
+db.execute('PRAGMA foreign_keys = 1')
 
 @dataclass
 class User:
@@ -13,8 +16,33 @@ class Deck:
     deckid: int
     name: str
     creator: str
-    lastedit: int # in unix epoch time
-    deleted: Literal[0, 1]
+    lastedit: int = int(datetime.now().timestamp())
+    deleted: Literal[0, 1] = 0
+
+    @staticmethod
+    def new(creator):
+        timestamp = str(int(datetime.now().timestamp()))
+        values = ("Untitled "+timestamp, creator)
+        cur = db.cursor()
+        cur.execute('insert into decks(name, creator) values (?,?)', values)
+        db.commit()
+        id = cur.lastrowid
+        cur.close()
+        row = db.execute('select * from decks where deckid=?', (id,)).fetchone()
+        return Deck(*row)
+
+    @staticmethod
+    def query(deckid):
+        row = db.execute('select * from decks where deckid=?', (deckid,)).fetchone()
+        return Deck(*row)
+
+    def isoformat(self):
+        return datetime.fromtimestamp(self.lastedit)
+
+    def update(self):
+        values = (self.name, int(datetime.now().timestamp()), self.deleted, self.deckid)
+        db.execute('update decks set name = ?, lastedit = ?, deleted = ? where deckid = ?', values)
+        db.commit()
 
 @dataclass
 class Card:
@@ -22,12 +50,48 @@ class Card:
     name: str
     content: str
     creator: str
-    lastedit: int # in unix epoch time
-    deleted: Literal[0, 1]
-    datatype: Literal["text", "image"]
+    lastedit: int = int(datetime.now().timestamp())
+    deleted: Literal[0, 1] = 0
+    datatype: Literal["text", "image"] = "text"
+
+    @staticmethod
+    def new(creator):
+        timestamp = str((datetime.now().timestamp()))
+        values = ("Untitled "+timestamp, "", creator)
+        cur = db.cursor()
+        cur.execute('insert into cards(name, content, creator) values(?,?,?)', values)
+        db.commit()
+        id = cur.lastrowid
+        cur.close()
+        row = db.execute('select * from cards where cardid=?', (id,)).fetchone()
+        return Card(*row)
+
+    @staticmethod
+    def query(cardid):
+        row = db.execute('selected * from cards where cardid=?', (cardid,))
+        return Card(*row)
+
+    def isoformat(self):
+        return datetime.fromtimestamp(self.lastedit)
+
+    def update(self):
+        values = (self.name, self.content, int(datetime.now().timestamp()), self.deleted, self.datatype, self.cardid)
+        db.execute('update cards set name=?, content=?, lastedit=?, deleted=?, datatype=?, where cardid=?', values)
+        db.commit()
 
 @dataclass
 class Deck_Cards:
     dcid: int
     cardid: int
     deckid: int
+
+    @staticmethod
+    def new(cardid, deckid):
+        values = (cardid, deckid)
+        cur = db.cursor()
+        cur.execute('insert into deck_cards(cardid, deckid) values (?,?)', values)
+        db.commit()
+        id = cur.lastrowid
+        cur.close()
+        row = db.execute('select * from deck_cards where dcid=?', (id,)).fetchone()
+        return Deck_Cards(*row)

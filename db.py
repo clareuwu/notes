@@ -34,7 +34,7 @@ def create_cards_table(drop = False):
         cardid integer primary key autoincrement,
         name text unique not null,
         content text not null,
-        creator text unique not null,
+        creator text not null,
         lastedit integer default (unixepoch()) not null,
         deleted integer default 0 not null,
         datatype text default "text" not null,

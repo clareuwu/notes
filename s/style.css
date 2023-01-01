@@ -96,6 +96,15 @@ input {
   text-decoration: none;
 }
 
+.card-meta {
+  align-self: end;
+  margin-left: auto;
+  font-size: 10px;
+  font-family: Verdana;
+  margin-bottom: 3px;
+  color: var(--page-nav-meta)
+}
+
 .timestamp {
   align-self: end;
   margin-left: auto;
@@ -111,7 +120,7 @@ input {
 .header-button {
   align-self: end;
   margin-left: 10px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 
 details.dropdown {

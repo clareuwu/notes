@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 import bcrypt
-from flask import Flask, render_template, request, redirect, abort, session
+from flask import Flask, render_template, request, redirect, abort, session, Response
 from models import User, Deck, Card, Deck_Cards
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
@@ -31,10 +31,14 @@ def query_user(username: str) -> str:
 
 def home_decks(n: int) -> list:
     """Return first n decks for displaying on notes home page"""
-    decks = db.execute('select deckid, name, lastedit from decks order by lastedit asc limit ?', (n,))
+    decks = db.execute('select deckid, name, lastedit from decks order by lastedit desc limit ?', (n,))
     decks = decks.fetchall()
-    decks = [ {'deckid': x[0], 'name': x[1], 'timestamp': x[2]} for x in decks ]
+    decks = [ {'deckid': x[0], 'name': x[1], 'timestamp': datetime.fromtimestamp(x[2])} for x in decks ]
     return decks
+
+def auth() -> None:
+    try: print(f"{session['username']} opened {request.path}")
+    except KeyError: abort(401)
 
 @app.route("/login")
 def get_login():
@@ -49,7 +53,7 @@ def post_login():
     db_password, = query_user(username)
     if not match_pass(password, db_password.encode('UTF-8')):
         abort(401)
-    session['username'] = username
+    else: session['username'] = username
     return redirect('/notes')
 
 @app.route('/notes')
@@ -59,16 +63,53 @@ def get_notes():
         print('user '+session['username']+'is logged in! :D')
     except KeyError:
         abort(401)
-    return render_template('notes.html', decks = home_decks(10))
+    return render_template('notes.html', title = f"gm {session['username']}", decks = home_decks(10))
 
-@app.route('/d/<deck>')
-def get_deck():
+@app.route('/d/<deckid>')
+def get_deck(deckid: int):
     """Handler for GET requests to /d/<deck>.
     Returns HTML for entire deck contents, including cards and their contents"""
-    pass
+    auth()
+    deckrow = db.execute('select * from decks where deckid = ?', (deckid,)).fetchone()
+    deck = Deck(*deckrow)
+    dc_rows = db.execute('select * from deck_cards where deckid = ?', (deckid,)).fetchall()
+    deck_cards = [Deck_Cards(*x) for x in dc_rows]
+    card_rows = [db.execute("select * from cards where cardid = ?", (x.cardid,)).fetchone() for x in deck_cards]
+    cards = [Card(*x) for x in card_rows]
+    return render_template('deck.html', title=deck.name, cards=cards, deck=True)
 
-@app.route('/c/<card>')
-def get_card():
+@app.route('/c/<cardid>')
+def get_card(cardid: int):
     """Handler for GET requests to /c/<card>
     Return HTML for a single card including contents"""
-    pass
+    auth()
+    row = db.execute('select * from cards where cardid = ?', (cardid,)).fetchone()
+    card = Card(*row)
+    return render_template('card.html', title=card.name, card=card)
+
+@app.post('/new-card')
+def new_card():
+    """Handler for POST requests to /new-card.
+    Used to create new card in db. Places into deck if on a /d page.
+    Redirects to new /c page otherwise."""
+    auth()
+    ref = request.referrer
+    if 'd' in ref.split('/'):
+        card = Card.new(session['username'])
+        deckid = ref.split('/')[-1]
+        Deck_Cards.new(card.cardid, deckid)
+        deck = Deck.query(deckid)
+        deck.update()
+        return render_template('card-s.html', card=card)
+    else:
+        card = Card.new(session['username'])
+        res = Response(headers={'HX-Redirect':f"/c/{card.cardid}"})
+        return res
+
+@app.post('/new-deck')
+def new_deck():
+    """Handler for POST requests to /new-deck
+    Returns redirect to new /d/<deckid> page."""
+    auth()
+    deck = Deck.new(session['username'])
+    return Response(headers={'HX-Redirect':f"/d/{deck.deckid}"})
