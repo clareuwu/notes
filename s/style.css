@@ -79,6 +79,25 @@ input {
   border: 1px solid grey;
 }
 
+.card-edit {
+  padding: 5px;
+  background: var(--page-pagecontent);
+  border: 1px dashed gray;
+}
+
+.edit-s-title {
+  margin-top: 12px;
+  margin-bottom: 2px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.edit-s-select {
+  margin-top: 12px;
+  margin-bottom: 2px;
+  margin-left: 5px;
+}
+
 .card p:last-child {
   margin: 0;
 }
@@ -120,7 +139,7 @@ input {
 .header-button {
   align-self: end;
   margin-left: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 2px;
 }
 
 details.dropdown {

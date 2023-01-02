@@ -1,12 +1,18 @@
 <!-- Standalone card for deck pages -->
-<div id="{{ card.cardid }}" order="{{ get_order(card.cardid, deckid) }}" class="note-card">
+<div id="id{{ card.cardid }}" order="{{ get_order(card.cardid, deckid) }}" class="note-card">
   <header  class="card-header">
     <h4>{{ card.name }}</h4>
     <div class="card-meta" style="/*! display: flex; *//*! flex-basis: min-content; */">
       {{ card.isoformat() }}
       |
       <a href="/c/{{ card.cardid }}">/c/{{ card.cardid }}</a>
-    </div><button class="header-button">Edit</button>
+    </div>
+    <button hx-get="/cse/{{ card.cardid }}"
+      hx-target="#id{{ card.cardid }}"
+      hx-trigger="click"
+      class="header-button">
+      Edit
+    </button>
   </header>
   <div class="card">
     <p>{{ card.content }}</p>

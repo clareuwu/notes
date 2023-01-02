@@ -68,7 +68,7 @@ class Card:
 
     @staticmethod
     def query(cardid: int):
-        row = db.execute('selected * from cards where cardid=?', (cardid,))
+        row = db.execute('select * from cards where cardid=?', (cardid,)).fetchone()
         return Card(*row)
 
     def isoformat(self):

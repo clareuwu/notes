@@ -113,3 +113,9 @@ def new_deck():
     auth()
     deck = Deck.new(session['username'])
     return Response(headers={'HX-Redirect':f"/d/{deck.deckid}"})
+
+@app.get('/cse/<cardid>')
+def get_cse(cardid: int):
+    card = Card.query(cardid)
+    deckid = request.referrer.split('/')[-1]
+    return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
