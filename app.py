@@ -76,7 +76,7 @@ def get_deck(deckid: int):
     deck_cards = [Deck_Cards(*x) for x in dc_rows]
     card_rows = [db.execute("select * from cards where cardid = ?", (x.cardid,)).fetchone() for x in deck_cards]
     cards = [Card(*x) for x in card_rows]
-    return render_template('deck.html', title=deck.name, cards=cards, deck=True)
+    return render_template('deck.html', title=deck.name, cards=cards, deck=True, get_order=Deck_Cards.order, deckid=deckid)
 
 @app.route('/c/<cardid>')
 def get_card(cardid: int):
@@ -97,10 +97,10 @@ def new_card():
     if 'd' in ref.split('/'):
         card = Card.new(session['username'])
         deckid = ref.split('/')[-1]
-        Deck_Cards.new(card.cardid, deckid)
+        dc = Deck_Cards.new(card.cardid, deckid, 1)
         deck = Deck.query(deckid)
         deck.update()
-        return render_template('card-s.html', card=card)
+        return render_template('card-s.html', card=card, get_order=Deck_Cards.order, deckid=deckid)
     else:
         card = Card.new(session['username'])
         res = Response(headers={'HX-Redirect':f"/c/{card.cardid}"})

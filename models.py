@@ -84,15 +84,20 @@ class Deck_Cards:
     dcid: int
     cardid: int
     deckid: int
-    order: int
+    cardorder: int
 
     @staticmethod
-    def new(cardid: int, deckid: int, order: int):
-        values = (cardid, deckid, order)
+    def new(cardid: int, deckid: int, cardorder: int):
+        values = (cardid, deckid, cardorder)
         cur = db.cursor()
-        cur.execute('insert into deck_cards(cardid, deckid, order) values (?,?,?)', values)
+        cur.execute('insert into deck_cards(cardid, deckid, cardorder) values (?,?,?)', values)
         db.commit()
         id = cur.lastrowid
         cur.close()
         row = db.execute('select * from deck_cards where dcid=?', (id,)).fetchone()
         return Deck_Cards(*row)
+
+    @staticmethod
+    def order(cardid: int, deckid: int) -> int:
+        row = db.execute('select cardorder from deck_cards where(cardid, deckid) = (?,?)', (cardid, deckid))
+        return row.fetchone()[0]
