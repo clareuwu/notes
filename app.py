@@ -52,9 +52,7 @@ def post_login():
     """Handler for POST requests to /login"""
     username = request.form['username']
     password = request.form['password']
-    print(f"{username} {password}")
     db_password, = query_user(username)
-    print(db_password)
     if not match_pass(password, db_password.encode('UTF-8')):
         abort(401)
     else: session['username'] = username
@@ -123,7 +121,6 @@ def get_cse(cardid: int):
     auth()
     card = Card.query(cardid)
     deckid = request.referrer.split('/')[-1]
-    print(card.markdown())
     return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
 
 @app.put('/cse/<cardid>')

@@ -92,7 +92,7 @@ class Deck_Cards:
 
     @staticmethod
     def new(cardid: int, deckid: int):
-        maxorder = db.execute('select max(cardorder) from deck_cards where deckid=?', deckid).fetchone()
+        maxorder = db.execute('select max(cardorder) from deck_cards where deckid=?', (deckid,)).fetchone()
         if maxorder != (None,):
             maxorder = maxorder[0] + 1
             values = (cardid, deckid, maxorder)
