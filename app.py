@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, abort, session, Res
 from models import User, Deck, Card, Deck_Cards
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
+# TODO Remove this obviously lol
 app.secret_key=b'245d0a327be38b04440549727c6a1d06904ed6262e50024359847adef2e97423'
 db = sqlite3.connect('app.db', check_same_thread=False)
 db.execute('PRAGMA foreign_keys = 1')
@@ -116,6 +117,7 @@ def new_deck():
 
 @app.get('/cse/<cardid>')
 def get_cse(cardid: int):
+    auth()
     card = Card.query(cardid)
     deckid = request.referrer.split('/')[-1]
     return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
