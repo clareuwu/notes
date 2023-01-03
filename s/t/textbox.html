@@ -1,1 +1,3 @@
-<textarea name="text" value="{{ card.content }}" style="width: 100%; resize: none; height: 41px;" oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + 5 + &quot;px&quot;"></textarea>
+<textarea id="{{card.id}}box" name="content"  style="width: 100%; resize: none; height: 41px;" oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + 5 + &quot;px&quot;" onload="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + 5 + &quot;px&quot;">
+  {{ card.content }}
+</textarea>

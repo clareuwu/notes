@@ -15,6 +15,6 @@
     </button>
   </header>
   <div class="card">
-    <p>{{ card.content }}</p>
+    {{ card.markdown()|safe }}
   </div>
 </div>

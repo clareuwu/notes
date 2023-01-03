@@ -2,6 +2,7 @@ from dataclasses import dataclass, astuple
 from datetime import datetime
 from typing import Literal
 import sqlite3
+import markdown as md
 db = sqlite3.connect('app.db', check_same_thread=False)
 db.execute('PRAGMA foreign_keys = 1')
 
@@ -74,10 +75,13 @@ class Card:
     def isoformat(self):
         return datetime.fromtimestamp(self.lastedit)
 
-    def update(self):
+    def update(self) -> None:
         values = (self.name, self.content, int(datetime.now().timestamp()), self.deleted, self.cardid)
-        db.execute('update cards set name=?, content=?, lastedit=?, deleted=?, where cardid=?', values)
+        db.execute('update cards set name=?, content=?, lastedit=?, deleted=? where cardid=?', values)
         db.commit()
+
+    def markdown(self) -> str:
+        return md.markdown(self.content)
 
 @dataclass
 class Deck_Cards:

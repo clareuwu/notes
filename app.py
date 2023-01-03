@@ -3,6 +3,7 @@ from datetime import datetime
 import bcrypt
 from flask import Flask, render_template, request, redirect, abort, session, Response
 from models import User, Deck, Card, Deck_Cards
+import markdown as md
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
 # TODO Remove this obviously lol
@@ -120,4 +121,18 @@ def get_cse(cardid: int):
     auth()
     card = Card.query(cardid)
     deckid = request.referrer.split('/')[-1]
+    print(card.markdown())
     return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
+
+@app.put('/cse/<cardid>')
+def put_cse(cardid: int):
+    """Handler for PUT request to /cse/cardid
+    Used for updating single cards inside a /d/ deck page"""
+    auth()
+    card = Card.query(cardid)
+    card.name = request.form['name']
+    card.content = request.form['content']
+    card.update()
+
+    deckid = request.referrer.split('/')[-1]
+    return render_template('card-s.html', card=card, deckid=deckid, get_order=Deck_Cards.order)

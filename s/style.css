@@ -80,7 +80,7 @@ input {
 }
 
 .card-edit {
-  padding: 5px;
+  padding: 2px;
   background: var(--page-pagecontent);
   border: 1px dashed gray;
 }
