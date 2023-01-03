@@ -4,7 +4,7 @@
 <div class="note-card">
   <header class="card-header">
     <h4></h4>
-    <div class="card-meta" style="/*! display: flex; *//*! flex-basis: min-content; */align-self: end;margin-left: auto;font-size: 10px;font-family: Verdana;margin-bottom: 3px;">{{ card.lastedit }} | {{ card.cardid }}</div><button class="header-button">Edit</button>
+    <div class="card-meta" style="/*! display: flex; *//*! flex-basis: min-content; */align-self: end;margin-left: auto;font-size: 10px;font-family: Verdana;margin-bottom: 3px;">{{ card.isoformat() }} | {{ card.cardid }}</div><button class="header-button">Edit</button>
   </header>
   <div class="card">
     <p>{{ card.content }}</p>

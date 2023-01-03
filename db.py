@@ -37,7 +37,6 @@ def create_cards_table(drop = False):
         creator text not null,
         lastedit integer default (unixepoch()) not null,
         deleted integer default 0 not null,
-        datatype text default "text" not null,
         foreign key (creator) references users(username)
         );''', 'cards', drop)
 

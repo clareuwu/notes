@@ -52,7 +52,7 @@ class Card:
     creator: str
     lastedit: int = int(datetime.now().timestamp())
     deleted: Literal[0, 1] = 0
-    datatype: Literal["text", "image"] = "text"
+    # datatype: Literal["text", "image"] = "text"
 
     @staticmethod
     def new(creator: str):
@@ -75,8 +75,8 @@ class Card:
         return datetime.fromtimestamp(self.lastedit)
 
     def update(self):
-        values = (self.name, self.content, int(datetime.now().timestamp()), self.deleted, self.datatype, self.cardid)
-        db.execute('update cards set name=?, content=?, lastedit=?, deleted=?, datatype=?, where cardid=?', values)
+        values = (self.name, self.content, int(datetime.now().timestamp()), self.deleted, self.cardid)
+        db.execute('update cards set name=?, content=?, lastedit=?, deleted=?, where cardid=?', values)
         db.commit()
 
 @dataclass
