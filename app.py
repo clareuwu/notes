@@ -52,7 +52,9 @@ def post_login():
     """Handler for POST requests to /login"""
     username = request.form['username']
     password = request.form['password']
+    print(f"{username} {password}")
     db_password, = query_user(username)
+    print(db_password)
     if not match_pass(password, db_password.encode('UTF-8')):
         abort(401)
     else: session['username'] = username
@@ -99,7 +101,7 @@ def new_card():
     if 'd' in ref.split('/'):
         card = Card.new(session['username'])
         deckid = ref.split('/')[-1]
-        dc = Deck_Cards.new(card.cardid, deckid, 1)
+        dc = Deck_Cards.new(card.cardid, deckid)
         deck = Deck.query(deckid)
         deck.update()
         return render_template('card-s.html', card=card, get_order=Deck_Cards.order, deckid=deckid)
@@ -133,6 +135,8 @@ def put_cse(cardid: int):
     card.name = request.form['name']
     card.content = request.form['content']
     card.update()
+    card = Card.query(cardid)
 
     deckid = request.referrer.split('/')[-1]
     return render_template('card-s.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
+

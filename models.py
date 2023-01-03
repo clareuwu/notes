@@ -91,13 +91,19 @@ class Deck_Cards:
     cardorder: int
 
     @staticmethod
-    def new(cardid: int, deckid: int, cardorder: int):
-        values = (cardid, deckid, cardorder)
+    def new(cardid: int, deckid: int):
+        maxorder = db.execute('select max(cardorder) from deck_cards where deckid=?', deckid).fetchone()
+        if maxorder != (None,):
+            maxorder = maxorder[0] + 1
+            values = (cardid, deckid, maxorder)
+        else: values = (cardid, deckid, 1)
+
         cur = db.cursor()
         cur.execute('insert into deck_cards(cardid, deckid, cardorder) values (?,?,?)', values)
         db.commit()
         id = cur.lastrowid
         cur.close()
+
         row = db.execute('select * from deck_cards where dcid=?', (id,)).fetchone()
         return Deck_Cards(*row)
 

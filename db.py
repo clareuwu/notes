@@ -52,6 +52,8 @@ def create_deck_entries_table(drop = False):
         foreign key (cardid) references cards(cardid) on delete cascade
         );''', 'deck_cards', drop)
 
+create_users_table(True)
 create_decks_table(True)
 create_cards_table(True)
 create_deck_entries_table(True)
+con.close()
