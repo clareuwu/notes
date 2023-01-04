@@ -17,3 +17,8 @@ To add a user manually, just run `create_user` in `app.py`, automatically hashes
 
 # TODO
 - [ ] Inline search box when transcluding cards/images/files
+- [ ] Add transclude for cards in other decks
+- [ ] Add transclude images inside cards
+- [ ] transclute other types of files inside cards
+- [ ] Search bar actually do anything
+- [ ] edit functionality for individual card pages
