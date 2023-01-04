@@ -33,8 +33,9 @@ def query_user(username: str) -> str:
 
 def home_decks(n: int) -> list:
     """Return first n decks for displaying on notes home page"""
-    decks = db.execute('select deckid, name, lastedit from decks order by lastedit desc limit ?', (n,))
+    decks = db.execute('select * from decks order by lastedit desc limit ?', (n,))
     decks = decks.fetchall()
+    print(decks)
     decks = [Deck(*row) for row in decks]
     return decks
 
@@ -78,7 +79,26 @@ def get_deck(deckid: int):
     deck_cards = [Deck_Cards(*x) for x in dc_rows]
     card_rows = [db.execute("select * from cards where cardid = ?", (x.cardid,)).fetchone() for x in deck_cards]
     cards = [Card(*x) for x in card_rows]
-    return render_template('deck.html', title=deck.name, cards=cards, deck=True, get_order=Deck_Cards.order, deckid=deckid)
+    return render_template('deck.html', title=deck.name, cards=cards, deck=deck, get_order=Deck_Cards.order, deckid=deckid)
+
+@app.route('/de/<deckid>')
+def get_deck_edit(deckid: int):
+    """Handler for GET requests to /de/<deckid>
+    Used for returning input for editing the decks name/title"""
+    auth()
+    deck = Deck.query(deckid)
+    return render_template('title-edit.html', deck=deck)
+
+@app.put('/de/<deckid>')
+def put_deck(deckid: int):
+    """Handler for PUT requests to /de/<deckid>
+    Used for handling changing name of deck title"""
+    auth()
+    deck = Deck.query(deckid)
+    title = request.form['decktitle']
+    deck.name = title
+    deck = deck.update()
+    return render_template('deck-title.html', deck=deck)
 
 @app.route('/c/<cardid>')
 def get_card(cardid: int):
@@ -121,6 +141,7 @@ def get_cse(cardid: int):
     auth()
     card = Card.query(cardid)
     deckid = request.referrer.split('/')[-1]
+    deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
     return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
 
 @app.put('/cse/<cardid>')
@@ -135,5 +156,8 @@ def put_cse(cardid: int):
     card = Card.query(cardid)
 
     deckid = request.referrer.split('/')[-1]
+    deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
+    deck = Deck.query(deckid)
+    deck.update() # update last edited time when editing cards inside deck
     return render_template('card-s.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
 

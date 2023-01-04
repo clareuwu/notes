@@ -17,8 +17,8 @@ class Deck:
     deckid: int
     name: str
     creator: str
-    lastedit: int = int(datetime.now().timestamp())
-    deleted: Literal[0, 1] = 0
+    lastedit: int
+    deleted: Literal[0, 1]
 
     @staticmethod
     def new(creator: str):
@@ -44,6 +44,7 @@ class Deck:
         values = (self.name, int(datetime.now().timestamp()), self.deleted, self.deckid)
         db.execute('update decks set name = ?, lastedit = ?, deleted = ? where deckid = ?', values)
         db.commit()
+        return Deck.query(self.deckid)
 
 @dataclass
 class Card:

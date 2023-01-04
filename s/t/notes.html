@@ -6,16 +6,15 @@
     <div class="note-card">
       <header class="card-header">
         <h4>
-          <a href="/d/{{ deck['deckid'] }}">
-            {{ deck['name'] }}
+          <a href="/d/{{ deck.deckid }}">
+            {{ deck.name }}
           </a>
         </h4>
         <div class="card-meta">
           {{ deck.isoformat() }}
           |
-          <a href="/d/{{ deck['deckid'] }}">/d/{{ deck['deckid'] }}</a>
+          <a href="/d/{{ deck.deckid }}">/d/{{ deck.deckid }}</a>
         </div>
-        <button class="header-button">Edit</button>
       </header>
     </div>
   </div>

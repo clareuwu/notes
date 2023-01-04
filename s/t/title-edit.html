@@ -1,0 +1,16 @@
+<form
+    hx-put="/de/{{deck.deckid}}"
+    hx-swap="outerHTML"
+    hx-target="this"
+    class="col"
+    name="deck-title"
+>
+<input
+    style="margin:0;width:100%;"
+    type="text"
+    value="{{deck.name}}"
+    name="decktitle"
+    for="deck-title"
+>
+</input>
+</form>

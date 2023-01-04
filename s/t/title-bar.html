@@ -1,5 +1,10 @@
 <div class="row">
-  <h3 class="page-title col text-capitalize">{{title}}</h3>
+  <h3
+    hx-get="/de/{{deckid}}"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-trigger="click"
+    class="page-title col text-capitalize">{{title}}</h3>
   <input type="search" placeholder="Search" class="col-3"></input>
 </div>
 
