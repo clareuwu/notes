@@ -26,8 +26,8 @@ pip install -r requirements.txt
 python db.py
 ```
 
-# Running
-start with `flask --app app run` or `flask --app app --debuf run` for auto reloading on file changes
+# Run
+start with `flask --app app run` or `flask --app app --debug run` for auto reloading on file changes
 
 # TODO
 - long term idea: some kind of publish feature to turn decks into blog posts, cards being separated sections
