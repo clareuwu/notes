@@ -34,7 +34,6 @@ def home_decks(n: int) -> list:
     """Return first n decks for displaying on notes home page"""
     decks = db.execute('select * from decks order by lastedit desc limit ?', (n,))
     decks = decks.fetchall()
-    print(decks)
     decks = [Deck(*row) for row in decks]
     return decks
 
@@ -61,10 +60,7 @@ def post_login():
 @app.route('/notes')
 def get_notes():
     """Handler for GET requests to /notes"""
-    try:
-        print('user '+session['username']+'is logged in! :D')
-    except KeyError:
-        abort(401)
+    auth()
     return render_template('notes.html', title = f"gm {session['username']}", decks = home_decks(10))
 
 @app.route('/d/<deckid>')
