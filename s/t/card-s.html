@@ -2,7 +2,7 @@
 <div id="id{{ card.cardid }}" order="{{ get_order(card.cardid, deckid) }}" class="note-card">
   <header  class="card-header">
     <h4>{{ card.name }}</h4>
-    <div class="card-meta" style="/*! display: flex; *//*! flex-basis: min-content; */">
+    <div class="card-meta">
       {{ card.isoformat() }}
       |
       <a href="/c/{{ card.cardid }}">/c/{{ card.cardid }}</a>
