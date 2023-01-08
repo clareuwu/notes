@@ -29,8 +29,8 @@ python db.py
 # Run
 start with `flask --app app run` or `flask --app app --debug run` for auto reloading on file changes
 
-# TODO
-- long term idea: some kind of publish feature to turn decks into blog posts, cards being separated sections
+# To do
+- maybe: some kind of publish feature to turn decks into blog posts, cards being separated sections
 - [ ] Inline search box when transcluding cards/images/files
 - [ ] Add transclude for cards in other decks
 - [ ] Add transclude images inside cards
@@ -40,3 +40,4 @@ start with `flask --app app run` or `flask --app app --debug run` for auto reloa
 - [ ] add lil script for making user
 - [ ] render latex blocks with katex
 - [ ] export notes to md documents
+- [ ] Kanban style deck/page for organizing projects?
