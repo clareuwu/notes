@@ -5,3 +5,4 @@ __pycache__
 key.bin
 .DS*
 notes.sock
+config.py

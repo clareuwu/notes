@@ -6,8 +6,7 @@ from models import User, Deck, Card, Deck_Cards
 import markdown as md
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
-# TODO Remove this obviously lol
-app.secret_key=b'245d0a327be38b04440549727c6a1d06904ed6262e50024359847adef2e97423'
+app.config.from_pyfile('config.py')
 db = sqlite3.connect('app.db', check_same_thread=False)
 db.execute('PRAGMA foreign_keys = 1')
 
