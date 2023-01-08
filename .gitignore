@@ -4,3 +4,4 @@ __pycache__
 .vim
 key.bin
 .DS*
+notes.sock
