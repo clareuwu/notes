@@ -20,6 +20,7 @@ To add a user manually, just run `create_user` in `app.py`.
 `python3` >= 3.8
 
 # Setup
+To install requirements and initialize db:
 ```
 python3 -m venv venv
 source venv/bin/activate
@@ -27,6 +28,7 @@ pip install -r requirements.txt
 python db.py
 ```
 
+To generate secret key:
 ```
 python3
 import os
