@@ -160,4 +160,3 @@ def put_cse(cardid: int):
     deck = Deck.query(deckid)
     deck.update() # update last edited time when editing cards inside deck
     return render_template('card-s.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
-
