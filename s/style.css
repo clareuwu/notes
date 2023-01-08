@@ -99,8 +99,9 @@ input {
   margin-left: 5px;
 }
 
-.card p:last-child {
-  margin: 0;
+.card *:last-child, .card *:first-child {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .card header > * {
