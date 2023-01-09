@@ -1,1 +1,17 @@
-<textarea id="{{card.cardid}}box" name="content"  style="width: 100%; resize: none; height: 41px;" oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + 5 + &quot;px&quot;" x-init="$el.style.height = &quot;&quot;;$el.style.height = $el.scrollHeight + 5 + &quot;px&quot;">{{ card.content }}</textarea>
+<textarea id="{{card.cardid}}box"
+  name="content"
+  style="width: 100%; resize: none; height: 41px;tab-size:2;"
+  oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + 5 + &quot;px&quot;"
+  x-init="$el.style.height = &quot;&quot;;$el.style.height = $el.scrollHeight + 5 + &quot;px&quot;"
+  @keydown.tab.prevent="
+    console.log('tabbed')
+    $el.setRangeText(
+        '\t',
+        $el.selectionStart,
+        $el.selectionStart,
+        'end'
+      )"
+  @keydown.escape.prevent="document.getElementById('{{card.cardid}}-save').click()"
+  @keydown.cmd.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
+  @keydown.shift.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
+  >{{ card.content }}</textarea>
