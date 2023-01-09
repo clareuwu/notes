@@ -99,8 +99,11 @@ input {
   margin-left: 5px;
 }
 
-.card *:last-child, .card *:first-child {
+.card *:first-child {
   margin-top: 0;
+}
+
+.card *:last-child  {
   margin-bottom: 0;
 }
 
