@@ -17,6 +17,7 @@ To add a user manually, just run `create_user` in `app.py`.
 
 # Requirements
 `sqlite3` >= 3.38.0
+
 `python3` >= 3.8
 
 # Setup
