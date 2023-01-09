@@ -99,12 +99,21 @@ input {
   margin-left: 5px;
 }
 
+.card p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .card *:first-child {
   margin-top: 0;
 }
 
 .card *:last-child  {
   margin-bottom: 0;
+}
+
+.card ul {
+  padding-left: 20px;
+  margin: 5px;
 }
 
 .card header > * {
