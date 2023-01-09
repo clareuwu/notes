@@ -47,7 +47,7 @@ start with `flask --app app run` or `flask --app app --debug run` for auto reloa
 - [ ] Add transclude images inside cards
 - [ ] transclute other types of files inside cards
 - [ ] Search bar actually do anything
-- [ ] edit functionality for individual card pages
+- [x] edit functionality for individual card pages
 - [ ] add lil script for making user
 - [ ] render latex blocks with katex
 - [ ] export notes to md documents
