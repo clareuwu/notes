@@ -133,10 +133,10 @@ def new_card():
     if 'd' in ref.split('/'):
         card = Card.new(session['username'])
         deckid = ref.split('/')[-1]
-        dc = Deck_Cards.new(card.cardid, deckid)
+        Deck_Cards.new(card.cardid, deckid)
         deck = Deck.query(deckid)
         deck.update()
-        return render_template('card-s.html', card=card, get_order=Deck_Cards.order, deckid=deckid)
+        return render_template('card-s.html', card=card, get_order=Deck_Cards.order, deckid=deckid, deck=deck)
     else:
         card = Card.new(session['username'])
         res = Response(headers={'HX-Redirect':f"/c/{card.cardid}"})
