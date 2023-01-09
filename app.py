@@ -178,6 +178,7 @@ def put_cse(cardid: int):
 
     ref = request.referrer.split('/')
     deckid = None
+    deck = None
     if 'd' in ref:
         deckid = ref[-1]
         deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
