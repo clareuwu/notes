@@ -1,5 +1,9 @@
 <form
+    {% if deck %}
     hx-put="/de/{{deck.deckid}}"
+    {% else %}
+    hx-put="/ce/{{card.cardid}}"
+    {% endif %}
     hx-swap="outerHTML"
     hx-target="this"
     class="col"
@@ -8,7 +12,11 @@
 <input
     style="margin:0;width:100%;"
     type="text"
+    {% if deck %}
     value="{{deck.name}}"
+    {% else %}
+    value="{{card.name}}"
+    {% endif %}
     name="decktitle"
     for="deck-title"
 >

@@ -99,6 +99,25 @@ def put_deck(deckid: int):
     deck = deck.update()
     return render_template('deck-title.html', deck=deck)
 
+@app.route('/ce/<cardid>')
+def get_card_edit(cardid: int):
+    """Handler for GET requests to /ce/<cardid>
+    Used for returning input for editing a cards name when viewing single card"""
+    auth()
+    card = Card.query(cardid)
+    return render_template('title-edit.html', deck=False, card=card)
+
+@app.put('/ce/<cardid>')
+def put_card_edit(cardid: int):
+    """Handler for PUT requests to /ce/<cardid>
+    Used for handling changing title of a card when viewing single card"""
+    auth()
+    card = Card.query(cardid)
+    title = request.form['decktitle']
+    card.name = title
+    card = card.update()
+    return render_template('deck-title.html', card=card)
+
 @app.route('/c/<cardid>')
 def get_card(cardid: int):
     """Handler for GET requests to /c/<card>
@@ -106,7 +125,7 @@ def get_card(cardid: int):
     auth()
     row = db.execute('select * from cards where cardid = ?', (cardid,)).fetchone()
     card = Card(*row)
-    return render_template('card.html', title=card.name, card=card)
+    return render_template('deck.html', title=card.name, card=card, cards=[card])
 
 @app.post('/new-card')
 def new_card():
@@ -139,8 +158,11 @@ def new_deck():
 def get_cse(cardid: int):
     auth()
     card = Card.query(cardid)
-    deckid = request.referrer.split('/')[-1]
-    deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
+    ref = request.referrer.split('/')
+    deckid = False
+    if 'd' in ref:
+        deckid = ref[-1]
+        deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
     return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
 
 @app.put('/cse/<cardid>')
@@ -154,8 +176,11 @@ def put_cse(cardid: int):
     card.update()
     card = Card.query(cardid)
 
-    deckid = request.referrer.split('/')[-1]
-    deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
-    deck = Deck.query(deckid)
-    deck.update() # update last edited time when editing cards inside deck
+    ref = request.referrer.split('/')
+    deckid = None
+    if 'd' in ref:
+        deckid = ref[-1]
+        deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
+        deck = Deck.query(deckid)
+        deck.update() # update last edited time when editing cards inside deck
     return render_template('card-s.html', card=card, deckid=deckid, get_order=Deck_Cards.order)

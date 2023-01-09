@@ -80,6 +80,7 @@ class Card:
         values = (self.name, self.content, int(datetime.now().timestamp()), self.deleted, self.cardid)
         db.execute('update cards set name=?, content=?, lastedit=?, deleted=? where cardid=?', values)
         db.commit()
+        return Card.query(self.cardid)
 
     def markdown(self) -> str:
         return md.markdown(self.content)
