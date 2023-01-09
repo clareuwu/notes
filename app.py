@@ -183,4 +183,4 @@ def put_cse(cardid: int):
         deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
         deck = Deck.query(deckid)
         deck.update() # update last edited time when editing cards inside deck
-    return render_template('card-s.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
+    return render_template('card-s.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order)
