@@ -112,8 +112,7 @@ input {
 }
 
 .card ul {
-  padding-left: 10px;
-  margin: 5px;
+  padding-left: 15px;
 }
 
 .card header > * {
