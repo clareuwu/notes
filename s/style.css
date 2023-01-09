@@ -348,3 +348,7 @@ details.dropdown > :last-child {
     flex: 0 0 calc((100% / (12/12)) - var(--grid-gutter));
     max-width: calc((100% / (12/12)) - var(--grid-gutter));
 }
+
+.hidden {
+  display: none;
+}

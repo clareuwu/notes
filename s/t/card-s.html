@@ -1,6 +1,12 @@
-<div id="id{{ card.cardid }}" order="{{ get_order(card.cardid, deckid) }}" class="note-card">
+<div id="id{{ card.cardid }}"
+  {% if deck %}
+  order="{{ get_order(card.cardid, deckid) }}"
+  {% endif %}
+  class="note-card">
   <header  class="card-header">
+    {% if deck %}
     <h4>{{ card.name }}</h4>
+    {% endif %}
     <div class="card-meta">
       {{ card.isoformat() }}
       |

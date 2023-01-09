@@ -1,6 +1,10 @@
 <div class="row">
   <h3
+    {% if not card %}
     hx-get="/de/{{deckid}}"
+    {% else %}
+    hx-get="/ce/{{card.cardid}}"
+    {% endif %}
     hx-target="this"
     hx-swap="outerHTML"
     hx-trigger="click"

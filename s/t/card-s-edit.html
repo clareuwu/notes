@@ -1,7 +1,11 @@
-<div id="id{{ card.cardid }}" order="{{ get_order(card.cardid, deckid) }}" class="note-card">
+<div id="id{{ card.cardid }}"
+  {% if deckid %}
+  order="{{ get_order(card.cardid, deckid) }}"
+  {% endif %}
+  class="note-card">
   <form hx-put="/cse/{{card.cardid}}" hx-target="#id{{card.cardid}}">
   <header class="card-header">
-    <input class="edit-s-title" value="{{ card.name }}" name="name">
+    <input class="edit-s-title {% if not deckid %}hidden{% endif %}" value="{{ card.name }}" name="name">
     <div class="card-meta" style="">
       {{ card.isoformat() }}
       |

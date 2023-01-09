@@ -1,8 +1,17 @@
 <h3
-    hx-get="/de/{{deck.deckid}}"
-    hx-target="this"
-    hx-swap="outerHTML"
-    hx-trigger="click"
-    class="page-title col text-capitalize">{{deck.name}}
+  {% if not card %}
+  hx-get="/de/{{deck.deckid}}"
+  {% else %}
+  hx-get="/ce/{{card.cardid}}"
+  {% endif %}
+  hx-target="this"
+  hx-swap="outerHTML"
+  hx-trigger="click"
+  class="page-title col text-capitalize">
+  {% if not card %}
+  {{deck.name}}
+  {% else %}
+  {{card.name}}
+  {% endif %}
 </h3>
 
