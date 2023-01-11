@@ -47,7 +47,7 @@ a {
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   margin-bottom: 0;
-  margin-top: 12px;
+  margin: 0;
 }
 
 button {
@@ -100,8 +100,8 @@ input {
 }
 
 .card p {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .card *:first-child {
   margin-top: 0;
@@ -363,4 +363,41 @@ details.dropdown > :last-child {
 
 .hidden {
   display: none;
+}
+
+/* Position & alignment */
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
 }
