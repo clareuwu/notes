@@ -17,7 +17,7 @@
   class="">New Deck</button>
 <button
   {% if deck %}
-  hx-post="/new-card" hx-target="#base-body" hx-swap="beforeend" class=""
+  hx-post="/new-card" hx-target="#cards" hx-swap="afterbegin" class=""
   {% else %}
   hx-post="/new-card" hx-swap="none"
   {% endif %}

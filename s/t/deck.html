@@ -2,8 +2,10 @@
 {% block body %}
 
 {% include "title-bar.html" %}
+<div id="cards">
 {% for card in cards %}
   {% include "card-s.html" %}
 {% endfor %}
+</div>
 
 {% endblock %}
