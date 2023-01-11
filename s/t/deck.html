@@ -3,7 +3,7 @@
 
 {% include "title-bar.html" %}
 <div id="cards">
-{% for card in cards %}
+{% for card in cards|reverse %}
   {% include "card-s.html" %}
 {% endfor %}
 </div>
