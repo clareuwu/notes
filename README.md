@@ -1,4 +1,4 @@
-Silly little notetaking app I'm making since I'm not happy with any other note taking/knowledge base apps, complete WIP.
+Little notes app I'm making since I'm not happy with any other note taking/knowledge base apps, complete WIP.
 
 Made with Flask, htmx, Alpine.js. Uses local sqlite3 db for persistence.
 
