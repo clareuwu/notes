@@ -28,7 +28,7 @@ python db.py # set up db tables
 
 Then add yourself a user: `python add_user.py <username> <password>`, replacing `<username>` and `<password>` with your own desired account info.
 
-> Note, there's currently no authentication for displaying cards only to the account that made them, so if you have more than one user they can all see/edit every card in the db. I'm mostly making this for my own personal use, but I'm planning on adding that feature eventually
+> Note, there's currently no authentication for displaying cards only to the account that made them, so if you have more than one user they can all see/edit every card in the db. I'm mostly making this for my own personal use, but I'm planning on implementing that eventually.
 
 To generate secret key:
 ```
