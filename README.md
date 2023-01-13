@@ -48,7 +48,8 @@ start with `flask --app app run` or `flask --app app --debug run` for auto reloa
 - [ ] transclute other types of files inside cards
 - [ ] Search bar actually do anything
 - [x] edit functionality for individual card pages
-- [ ] add lil script for making user
+- [ ] middleware for auth to redirect instead of 401
+- [x] add lil script for making user
 - [ ] render latex blocks with katex
 - [ ] export notes to md documents
 - [ ] Kanban style deck/page for organizing projects?

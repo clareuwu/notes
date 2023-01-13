@@ -18,7 +18,7 @@ def match_pass(password: str, hashed: bytes) -> bool:
     """Check if pw matches hashed password"""
     return bcrypt.checkpw(password.encode('UTF-8'), hashed)
 
-def create_user(username: str, password: str) -> bool:
+def create_user(username: str, password: str) -> None:
     """Create user in DB"""
     hashed = hash_pass(password).decode()
     db.execute('insert into users(username, hashpass) values (?, ?)', (username, hashed))
