@@ -401,3 +401,7 @@ details.dropdown > :last-child {
 .text-capitalize {
     text-transform: capitalize;
 }
+
+.error {
+  color: red;
+}

@@ -16,6 +16,9 @@
       class="header-button"
       id="{{ card.cardid }}-save">Save</button>
   </header>
+  {% if error %}
+  <div class="error">Invalid card name: already exists</div>
+  {% endif %}
   <div class="card-edit">
     {% include "textbox.html" %}
   </div>
