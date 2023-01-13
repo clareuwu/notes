@@ -46,11 +46,11 @@ start with `flask --app app run` or `flask --app app --debug run` for auto reloa
 - [ ] Inline search box when transcluding cards/images/files
 - [ ] Add transclude for cards in other decks
 - [ ] Add transclude images inside cards
-- [ ] transclute other types of files inside cards
+- [ ] transclude other types of files inside cards
 - [ ] Search bar actually do anything
 - [x] edit functionality for individual card pages
 - [ ] middleware for auth to redirect instead of 401
 - [x] add lil script for making user
-- [ ] render latex blocks with katex
+- [x] render latex blocks with katex
 - [ ] export notes to md documents
 - [ ] Kanban style deck/page for organizing projects?
