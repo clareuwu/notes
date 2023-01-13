@@ -183,7 +183,7 @@ def put_cse(cardid: int):
         card.update()
     except sqlite3.IntegrityError:
         card = Card.query(cardid)
-        return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error=True)
+        return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Card name already in use')
     card = Card.query(cardid)
 
     return render_template('card-s.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order)
