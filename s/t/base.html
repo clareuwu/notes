@@ -7,7 +7,7 @@
   <title>Notes</title>
   <link rel="icon" type="image/x-icon" href="/s/favicon.png">
   <link rel="stylesheet" href="/s/style.css">
-  <script src="https://unpkg.com/alpinejs" defer></script>
+  <script src="/s/alpine.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
 
   <!-- The loading of KaTeX is deferred to speed up page rendering -->
@@ -41,7 +41,7 @@
     </div>
   </nav>
 </header>
-<div x-data="" @keydown.document="console.log($event)" class="container page-frame">
+<div x-data="" @keyup.document="console.log($event)" class="container page-frame">
   <div class="container page-content">
     <div id="base-body">
       {% block body %}
