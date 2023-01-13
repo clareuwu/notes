@@ -14,11 +14,16 @@
 
 <button
   hx-post="/new-deck" hx-swap="none"
-  class="">New Deck</button>
+  class="">
+  New Deck
+</button>
 <button
   {% if deck %}
   hx-post="/new-card" hx-target="#cards" hx-swap="afterbegin" class=""
   {% else %}
   hx-post="/new-card" hx-swap="none"
-  {% endif %}
-  >New Card</button>
+  {% endif %}>
+  New Card
+</button>
+
+<script>console.log('hi')</script>
