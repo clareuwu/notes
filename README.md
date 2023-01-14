@@ -43,6 +43,7 @@ start with `flask --app app run` or `flask --app app --debug run` for auto reloa
 
 # Keyboard shortcuts
 `d`: new deck
+
 `c`: new card
 
 inside card textarea:
