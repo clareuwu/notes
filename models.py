@@ -88,7 +88,10 @@ class Card:
         def url_builder(label: str, base: str, end: str) -> str:
             print(label, base, end)
             label = label.strip()
-            cardid = db.execute('select cardid from cards where name = ?', (label,)).fetchone()[0]
+            try:
+                cardid = db.execute('select cardid from cards where name = ?', (label,)).fetchone()[0]
+            except:
+                return "#" # TODO: Make non-existent card links make a new card
             return f"/c/{cardid}"
 
         markdown = md.markdown(self.content,
