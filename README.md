@@ -47,7 +47,7 @@ outside card textarea:
 - `c`: new card
 
 inside card textarea:
-- `escape, cmd-enter, shift-enter`: save content
+- `escape`, `cmd-enter`, `shift-enter`: save content
 
 
 # To do
