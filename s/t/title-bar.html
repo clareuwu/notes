@@ -13,15 +13,12 @@
 </div>
 
 <div id="key-listener"
-    @keyup.document="()=>{
-      const isBody = ($event.target.localName === 'body' );
-      if (isBody) {
-        if ($event.key === 'd') {document.getElementById('new-deck').click()}
-        if ($event.key === 'c') {document.getElementById('new-card').click()}
-      }}"
+    @keyup.shift.d.document="if($event.target.localName==='body'){$refs.newdeck.click()}"
+    @keyup.shift.c.document="if($event.target.localName==='body'){$refs.newcard.click()}"
 ></div>
 <button
   id="new-deck"
+  x-ref="newdeck"
   hx-post="/new-deck" hx-swap="none"
   class=""
 >
@@ -29,6 +26,7 @@
 </button>
 <button
   id="new-card"
+  x-ref="newcard"
   {% if deck %}
   hx-post="/new-card" hx-target="#cards" hx-swap="afterbegin" class=""
   {% else %}
