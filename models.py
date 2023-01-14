@@ -113,3 +113,8 @@ class Deck_Cards:
     def order(cardid: int, deckid: int) -> int:
         row = db.execute('select cardorder from deck_cards where(cardid, deckid) = (?,?)', (cardid, deckid))
         return row.fetchone()[0]
+
+    @staticmethod
+    def delete(cardid: int, deckid: int):
+        db.execute('delete from deck_cards where (cardid, deckid) in (values (?, ?))', (cardid, deckid))
+        db.commit()

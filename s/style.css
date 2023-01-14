@@ -79,6 +79,10 @@ input {
   border: 1px solid grey;
 }
 
+.note-card {
+  margin-top: 10px;
+}
+
 .card-edit {
   padding: 2px;
   background: var(--page-pagecontent);
@@ -123,6 +127,7 @@ input {
 
 .card-header {
   display: flex;
+  align-items: end;
 }
 
 .card-header a {

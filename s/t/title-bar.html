@@ -12,18 +12,28 @@
   <input type="search" placeholder="Search" class="col-3"></input>
 </div>
 
+<div id="key-listener"
+    @keyup.document="()=>{
+      const isBody = ($event.target.localName === 'body' );
+      if (isBody) {
+        if ($event.key === 'd') {document.getElementById('new-deck').click()}
+        if ($event.key === 'c') {document.getElementById('new-card').click()}
+      }}"
+></div>
 <button
+  id="new-deck"
   hx-post="/new-deck" hx-swap="none"
-  class="">
+  class=""
+>
   New Deck
 </button>
 <button
+  id="new-card"
   {% if deck %}
   hx-post="/new-card" hx-target="#cards" hx-swap="afterbegin" class=""
   {% else %}
   hx-post="/new-card" hx-swap="none"
-  {% endif %}>
+  {% endif %}
+>
   New Card
 </button>
-
-<script>console.log('hi')</script>

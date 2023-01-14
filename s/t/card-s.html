@@ -33,6 +33,15 @@
       class="header-button">
       Edit
     </button>
+    {% if deck %}
+    <button
+        class="header-button"
+        hx-delete="/csd/{{deckid}}/{{card.cardid}}"
+        hx-target="#id{{ card.cardid }}"
+        hx-swap="outerHTML">
+      Delete
+    </button>
+    {% endif %}
   </header>
   <div class="card">
     {{ card.markdown()|safe }}
