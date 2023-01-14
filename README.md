@@ -43,8 +43,8 @@ start with `flask --app app run` or `flask --app app --debug run` for auto reloa
 
 # Keyboard shortcuts
 outside card textarea:
-- `d`: new deck
-- `c`: new card
+- `shift-d`: new deck
+- `shift-c`: new card
 
 inside card textarea:
 - `escape`, `cmd-enter`, `shift-enter`: save content
