@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Literal
 import sqlite3
 import markdown as md
+from markdown.extensions.wikilinks import WikiLinkExtension
 db = sqlite3.connect('app.db', check_same_thread=False)
 db.execute('PRAGMA foreign_keys = 1')
 
@@ -83,7 +84,16 @@ class Card:
         return Card.query(self.cardid)
 
     def markdown(self) -> str:
-        return md.markdown(self.content)
+        """Returns HTML from card elements self.content for displaying on page"""
+        def url_builder(label: str, base: str, end: str) -> str:
+            print(label, base, end)
+            label = label.strip()
+            cardid = db.execute('select cardid from cards where name = ?', (label,)).fetchone()[0]
+            return f"/c/{cardid}"
+
+        markdown = md.markdown(self.content,
+                        extensions=[WikiLinkExtension(build_url=url_builder)])
+        return md.markdown(markdown)
 
 @dataclass
 class Deck_Cards:
