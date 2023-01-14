@@ -32,7 +32,7 @@ def create_cards_table(drop = False):
     """Create table for card info"""
     make_table_wrapper('''create table cards(
         cardid integer primary key autoincrement,
-        name text unique not null,
+        name text collate nocase unique not null,
         content text not null,
         creator text not null,
         lastedit integer default (unixepoch()) not null,

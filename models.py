@@ -77,7 +77,7 @@ class Card:
         return datetime.fromtimestamp(self.lastedit)
 
     def update(self) -> None:
-        values = (self.name, self.content, int(datetime.now().timestamp()), self.deleted, self.cardid)
+        values = (self.name.strip(), self.content, int(datetime.now().timestamp()), self.deleted, self.cardid)
         db.execute('update cards set name=?, content=?, lastedit=?, deleted=? where cardid=?', values)
         db.commit()
         return Card.query(self.cardid)
