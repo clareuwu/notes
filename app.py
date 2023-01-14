@@ -188,6 +188,11 @@ def put_cse(cardid: int):
 
     return render_template('card-s.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order)
 
+@app.delete('/csd/<deckid>/<cardid>')
+def del_card(deckid: int, cardid: int):
+    Deck_Cards.delete(cardid, deckid)
+    return ''
+
 @app.route('/')
 def index():
     return render_template('index.html')
