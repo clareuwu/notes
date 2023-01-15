@@ -16,7 +16,7 @@
     })
     console.log('rendering katex');
     const wikilinks = document.querySelectorAll('#id{{card.cardid}} .wikilink');
-    wikilinks.forEach(async link => {p = await fetch('/card-preview/{{card.cardid}}').then(r=>r.text());
+    wikilinks.forEach(async link => {p = await fetch('/card-preview/'+link.href.split('/')[4]).then(r=>r.text());
       const preview = document.createElement('div')
       link.insertAdjacentElement('afterend', preview)
       preview.outerHTML = p
