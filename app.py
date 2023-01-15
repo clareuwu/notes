@@ -166,9 +166,6 @@ def put_cse(cardid: int):
     """Handler for PUT request to /cse/cardid
     Used for updating single cards inside a /d/ deck page"""
     auth()
-    card = Card.query(cardid)
-    card.name = request.form['name']
-    card.content = request.form['content']
 
     ref = request.referrer.split('/')
     deckid = None
@@ -178,12 +175,23 @@ def put_cse(cardid: int):
         deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
         deck = Deck.query(deckid)
 
+    card = Card.query(cardid)
+    new_name_card = db.execute('select name from cards where name = ?', (request.form['name'].strip(),)).fetchone()
+    if new_name_card and new_name_card[0] != request.form['name'].strip():
+        return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Card name already in use')
+    card.name = request.form['name']
+    card.content = request.form['content']
+
     try:
         card.update()
         deck.update() # update last edited time when editing cards inside deck
     except sqlite3.IntegrityError:
         card = Card.query(cardid)
         return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Card name already in use')
+    except sqlite3.OperationalError:
+        card = Card.query(cardid)
+        # TODO: fix whatever is causing this error when trying to save a card after getting an integrity error
+        return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Database error, try again in a few seconds')
 
     card = Card.query(cardid)
     return render_template('card-s.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order)
