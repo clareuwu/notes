@@ -125,6 +125,11 @@ def get_card(cardid: int):
     card = Card(*row)
     return render_template('deck.html', title=card.name, card=card, cards=[card])
 
+@app.post('/transclude/<deckid>')
+def transclude(deckid: int):
+    auth()
+
+
 @app.post('/new-card')
 def new_card():
     """Handler for POST requests to /new-card.
