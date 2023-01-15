@@ -154,6 +154,7 @@ def new_deck():
 
 @app.get('/cse/<cardid>')
 def get_cse(cardid: int):
+    """Handler to render an card's edit template"""
     auth()
     card = Card.query(cardid)
     ref = request.referrer.split('/')
@@ -166,7 +167,7 @@ def get_cse(cardid: int):
 @app.put('/cse/<cardid>')
 def put_cse(cardid: int):
     """Handler for PUT request to /cse/cardid
-    Used for updating single cards inside a /d/ deck page"""
+    Used for updating single cards content inside a /d/ deck page"""
     auth()
 
     ref = request.referrer.split('/')
@@ -200,8 +201,14 @@ def put_cse(cardid: int):
 
 @app.delete('/csd/<deckid>/<cardid>')
 def del_card(deckid: int, cardid: int):
+    """Removes a card from a deck"""
     Deck_Cards.delete(cardid, deckid)
     return ''
+
+@app.route('/card-preview/<cardid>')
+def card_preview(cardid: int):
+    card = Card.query(cardid)
+    return render_template('card-preview.html', card=card)
 
 @app.route('/')
 def index():

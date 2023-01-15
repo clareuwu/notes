@@ -12,8 +12,16 @@
       {left: '\\begin{CD}', right: '\\end{CD}', display: true},
       {left: '\\[', right: '\\]', display: true}
     ],
-    });})
-    console.log('rendering katex')"
+    });
+    })
+    console.log('rendering katex');
+    const wikilinks = document.querySelectorAll('#id{{card.cardid}} .wikilink');
+    wikilinks.forEach(async link => {p = await fetch('/card-preview/{{card.cardid}}').then(r=>r.text());
+      const preview = document.createElement('div')
+      link.insertAdjacentElement('afterend', preview)
+      preview.outerHTML = p
+    })
+    "
   {% if deck %}
   order="{{ get_order(card.cardid, deckid) }}"
   {% endif %}
