@@ -81,14 +81,15 @@ class Card:
 
     def update(self) -> None:
         values = (self.name.strip(), self.content, int(datetime.now().timestamp()), self.deleted, self.cardid)
-        db.execute('update cards set name=?, content=?, lastedit=?, deleted=? where cardid=?', values)
+        cur = db.cursor()
+        cur.execute('update cards set name=?, content=?, lastedit=?, deleted=? where cardid=?', values)
         db.commit()
+        cur.close()
         return Card.query(self.cardid)
 
     def markdown(self) -> str:
         """Returns HTML from card elements self.content for displaying on page"""
         def url_builder(label: str, base: str, end: str) -> str:
-            print(label, base, end)
             label = label.strip()
             try:
                 cardid = db.execute('select cardid from cards where name = ?', (label,)).fetchone()[0]
