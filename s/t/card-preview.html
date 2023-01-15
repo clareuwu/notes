@@ -1,3 +1,16 @@
-<div id="{{card.cardid}}-prev" style="height:fit-content;width:500px;background:white;border:1px solid grey;position: absolute;">
+<div id="{{card.cardid}}-prev" x-init="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\begin{equation}', right: '\\end{equation}', display: true},
+      {left: '\\begin{align}', right: '\\end{align}', display: true},
+      {left: '\\begin{alignat}', right: '\\end{alignat}', display: true},
+      {left: '\\begin{gather}', right: '\\end{gather}', display: true},
+      {left: '\\begin{CD}', right: '\\end{CD}', display: true},
+      {left: '\\[', right: '\\]', display: true}
+    ],
+  });"
+  style="height:fit-content;width:100%;background:#f4f4f4;border:1px solid grey;padding:5px;">
   {{card.markdown()|safe}}
 </div>
