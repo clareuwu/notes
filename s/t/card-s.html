@@ -39,6 +39,7 @@
         class="header-button"
         hx-delete="/csd/{{deckid}}/{{card.cardid}}"
         hx-target="#id{{ card.cardid }}"
+        hx-confirm="Are you sure you want to delete card {{card.name}}?"
         hx-swap="outerHTML">
       Delete
     </button>
