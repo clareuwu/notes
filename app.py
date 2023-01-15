@@ -4,11 +4,13 @@ import bcrypt
 from flask import Flask, render_template, request, redirect, abort, session, Response
 from models import User, Deck, Card, Deck_Cards
 import markdown as md
+from models import db
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
 app.config.from_pyfile('config.py')
-db = sqlite3.connect('app.db', check_same_thread=False)
+#db = sqlite3.connect('app.db', check_same_thread=False)
 db.execute('PRAGMA foreign_keys = 1')
+db.commit()
 
 def hash_pass(password: str) -> bytes:
     """Hash password w bcrypt, return hashed in bytes"""
