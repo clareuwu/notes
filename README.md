@@ -53,7 +53,8 @@ inside card textarea:
 # To do
 - maybe: some kind of publish feature to turn decks into blog posts, cards being separated sections
 - [ ] Inline search box when transcluding cards/images/files
-- [ ] Add transclude for cards in other decks
+- [x] Add transclude for cards in other cards
+- [ ] Add include existing card in current deck
 - [ ] Add transclude images inside cards
 - [ ] transclude other types of files inside cards
 - [ ] Search bar actually do anything
