@@ -15,6 +15,7 @@
 <div id="key-listener"
     @keyup.shift.d.document="if($event.target.localName==='body'){$refs.newdeck.click()}"
     @keyup.shift.c.document="if($event.target.localName==='body'){$refs.newcard.click()}"
+    @keyup.shift.t.document="if($event.target.localName==='body'){$refs.transclude.click()}"
 ></div>
 <button
   id="new-deck"
@@ -34,4 +35,13 @@
   {% endif %}
 >
   New Card
+</button>
+<button
+  id="transclude-card"
+  x-ref="transclude"
+  hx-post="/transclude/{{deckid}}"
+  hx-target="#cards"
+  hx-swap="afterbegin"
+>
+  Transclude
 </button>
