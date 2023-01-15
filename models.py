@@ -93,7 +93,7 @@ class Card:
             label = label.strip()
             try:
                 cardid = db.execute('select cardid from cards where name = ?', (label,)).fetchone()[0]
-            except:
+            except: # card does not exist
                 return "#" # TODO: Make non-existent card links make a new card
             return f"/c/{cardid}"
 
