@@ -43,8 +43,10 @@ class Deck:
 
     def update(self):
         values = (self.name, int(datetime.now().timestamp()), self.deleted, self.deckid)
-        db.execute('update decks set name = ?, lastedit = ?, deleted = ? where deckid = ?', values)
+        cur = db.cursor()
+        cur.execute('update decks set name = ?, lastedit = ?, deleted = ? where deckid = ?', values)
         db.commit()
+        cur.close()
         return Deck.query(self.deckid)
 
 @dataclass

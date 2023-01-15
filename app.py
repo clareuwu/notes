@@ -177,15 +177,15 @@ def put_cse(cardid: int):
         deckid = ref[-1]
         deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
         deck = Deck.query(deckid)
-        deck.update() # update last edited time when editing cards inside deck
 
     try:
         card.update()
+        deck.update() # update last edited time when editing cards inside deck
     except sqlite3.IntegrityError:
         card = Card.query(cardid)
         return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Card name already in use')
-    card = Card.query(cardid)
 
+    card = Card.query(cardid)
     return render_template('card-s.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order)
 
 @app.delete('/csd/<deckid>/<cardid>')
