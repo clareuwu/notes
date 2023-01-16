@@ -429,6 +429,7 @@ hr {
   width: 90vw;
   border-radius: 2px;
   background: #eee;
+  z-index: 9;
 }
 
 .card-search {
