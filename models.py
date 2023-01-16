@@ -4,6 +4,7 @@ from typing import Literal
 import sqlite3
 import markdown as md
 from markdown.extensions.wikilinks import WikiLinkExtension
+import re
 db = sqlite3.connect('app.db', check_same_thread=False)
 db.execute('PRAGMA foreign_keys = 1')
 
@@ -89,16 +90,22 @@ class Card:
 
     def markdown(self) -> str:
         """Returns HTML from card elements self.content for displaying on page"""
-        def url_builder(label: str, base: str, end: str) -> str:
+        def url_builder(label: str, alias: str) -> str:
             label = label.strip()
+            alias = alias.strip()
             try:
                 cardid = db.execute('select cardid from cards where name = ?', (label,)).fetchone()[0]
             except: # card does not exist
-                return "#" # TODO: Make non-existent card links make a new card
-            return f"/c/{cardid}"
+                return f'<a href="#" class="wikilink">{alias if alias else label}</a>' # TODO: Make non-existent card links make a new card
+            return f'<a href="/c/{cardid}" class="wikilink">{alias if alias else label}</a>'
 
-        markdown = md.markdown(self.content,
-                        extensions=[WikiLinkExtension(build_url=url_builder), 'fenced_code', 'codehilite'])
+        def regex_url_builder(matchobj):
+            return url_builder(matchobj.group(1), matchobj.group(2))
+        # markdown = md.markdown(self.content,
+        #               extensions=[WikiLinkExtension(build_url=url_builder), 'fenced_code', 'codehilite'])
+        markdown = md.markdown(self.content, extensions=['fenced_code', 'codehilite'])
+        wikilinks_regex = re.compile(r'\[\[([\w\-\s]*)\|?([\w\-\s]*)?\]\]')
+        markdown = wikilinks_regex.sub(regex_url_builder, markdown)
         return md.markdown(markdown)
 
 @dataclass
