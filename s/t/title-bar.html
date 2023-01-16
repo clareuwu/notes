@@ -37,20 +37,22 @@
 
 <div x-data="{showSearch: false, trap: false}" x-show="showSearch"
     x-cloak
-    x-trap.inert="trap"
+    x-trap="trap"
     @keydown.shift.s.document="if(!['textarea','input'].includes($event.target.localName))
                                    {showSearch=!showSearch; trap=!trap}"
     @click.outside="showSearch=false; trap=false;"
     @keydown.escape.document="showSearch=false; trap=false;"
     @keydown.enter.document="if(showSearch)
                                        {showSearch=false; trap=false}"
+    @keydown.tab.document="if(trap){$focus.next()}"
+    @keydown.shift.tab.document="if(trap){$focus.previous()}"
     class="search-wrapper">
 
   <input class="card-search" type="search"
          name="search" placeholder="Begin typing to search cards"
          x-ref="search"
          hx-post="/search"
-         hx-trigger="keyup search"
+         hx-trigger="keyup, search"
          hx-target="#search-results">
 
   <div id="search-results" class="search-results">
