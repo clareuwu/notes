@@ -235,6 +235,7 @@ def post_include(cardid: int):
 @app.post('/search')
 def get_search():
     # my brain is fried this feels ridiculous but it stays for now
+    if request.form['search'] == '': return ''
     cards = db.execute('select * from cards').fetchall()
     # list of all cards
     card_objs = [Card(*row) for row in cards]
