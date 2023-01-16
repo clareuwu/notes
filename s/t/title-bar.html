@@ -9,13 +9,11 @@
     hx-swap="outerHTML"
     hx-trigger="click"
     class="page-title col">{{title}}</h3>
-  <input type="search" placeholder="Search" class="col-3"></input>
 </div>
 
 <div id="key-listener"
     @keyup.shift.d.document="if($event.target.localName==='body'){$refs.newdeck.click()}"
     @keyup.shift.c.document="if($event.target.localName==='body'){$refs.newcard.click()}"
-    @keyup.shift.t.document="if($event.target.localName==='body'){$refs.transclude.click()}">
 </div>
 
 <button
@@ -37,23 +35,10 @@
   New Card
 </button>
 
-<form style="display:inline-flex;">
-  <input x-ref="transcludeInput" class="hidden" name="transclude-input"></input>
-  <button
-    id="transclude-card"
-    x-ref="transclude"
-    hx-post="/transclude/{{deckid}}"
-    hx-target="#cards"
-    hx-swap="afterbegin"
-    @click="$refs.transcludeInput.value = prompt('Enter card name or ID')">
-    Transclude
-  </button>
-</form>
-
 <div x-data="{showSearch: false, trap: false}" x-show="showSearch"
     x-cloak
     x-trap.inert="trap"
-    @keydown.shift.s.document="if($event.target.localName==='body')
+    @keydown.shift.s.document="if(!['textarea','input'].includes($event.target.localName))
                                    {showSearch=!showSearch; trap=!trap}"
     @click.outside="showSearch=false; trap=false;"
     @keydown.escape.document="showSearch=false; trap=false;"
