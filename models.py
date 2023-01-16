@@ -98,7 +98,7 @@ class Card:
             return f"/c/{cardid}"
 
         markdown = md.markdown(self.content,
-                        extensions=[WikiLinkExtension(build_url=url_builder)])
+                        extensions=[WikiLinkExtension(build_url=url_builder), 'fenced_code', 'codehilite'])
         return md.markdown(markdown)
 
 @dataclass
