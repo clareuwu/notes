@@ -15,16 +15,17 @@
 <div id="key-listener"
     @keyup.shift.d.document="if($event.target.localName==='body'){$refs.newdeck.click()}"
     @keyup.shift.c.document="if($event.target.localName==='body'){$refs.newcard.click()}"
-    @keyup.shift.t.document="if($event.target.localName==='body'){$refs.transclude.click()}"
-></div>
+    @keyup.shift.t.document="if($event.target.localName==='body'){$refs.transclude.click()}">
+</div>
+
 <button
   id="new-deck"
   x-ref="newdeck"
   hx-post="/new-deck" hx-swap="none"
-  class=""
->
+  class="">
   New Deck
 </button>
+
 <button
   id="new-card"
   x-ref="newcard"
@@ -32,16 +33,41 @@
   hx-post="/new-card" hx-target="#cards" hx-swap="afterbegin" class=""
   {% else %}
   hx-post="/new-card" hx-swap="none"
-  {% endif %}
->
+  {% endif %}>
   New Card
 </button>
-<button
-  id="transclude-card"
-  x-ref="transclude"
-  hx-post="/transclude/{{deckid}}"
-  hx-target="#cards"
-  hx-swap="afterbegin"
->
-  Transclude
-</button>
+
+<form style="display:inline-flex;">
+  <input x-ref="transcludeInput" class="hidden" name="transclude-input"></input>
+  <button
+    id="transclude-card"
+    x-ref="transclude"
+    hx-post="/transclude/{{deckid}}"
+    hx-target="#cards"
+    hx-swap="afterbegin"
+    @click="$refs.transcludeInput.value = prompt('Enter card name or ID')">
+    Transclude
+  </button>
+</form>
+
+<div x-data="{showSearch: false, trap: false}" x-show="showSearch"
+    x-cloak
+    x-trap.inert="trap"
+    @keydown.shift.s.document="if($event.target.localName==='body')
+                                   {showSearch=!showSearch; trap=!trap}"
+    @click.outside="showSearch=false; trap=false;"
+    @keydown.escape.document="showSearch=false; trap=false;"
+    @keydown.enter.document="if(showSearch)
+                                       {showSearch=false; trap=false}"
+    class="search-wrapper">
+
+  <input class="card-search" type="search"
+         name="search" placeholder="Begin typing to search cards"
+         x-ref="search"
+         hx-post="/search"
+         hx-trigger="keyup delay:500ms, search"
+         hx-target="#search-results">
+
+  <div id="search-results" class="search-results">
+  </div>
+</div>

@@ -2,9 +2,10 @@ import sqlite3
 from datetime import datetime
 import bcrypt
 from flask import Flask, render_template, request, redirect, abort, session, Response
-from models import User, Deck, Card, Deck_Cards
 import markdown as md
+from models import User, Deck, Card, Deck_Cards
 from models import db
+from thefuzz import process
 
 app = Flask(__name__, template_folder='s/t', static_folder='s')
 app.config.from_pyfile('config.py')
@@ -70,8 +71,7 @@ def get_deck(deckid: int):
     """Handler for GET requests to /d/<deck>.
     Returns HTML for entire deck contents, including cards and their contents"""
     auth()
-    deckrow = db.execute('select * from decks where deckid = ?', (deckid,)).fetchone()
-    deck = Deck(*deckrow)
+    deck = Deck.query(deckid)
     dc_rows = db.execute('select * from deck_cards where deckid = ?', (deckid,)).fetchall()
     deck_cards = [Deck_Cards(*x) for x in dc_rows]
     card_rows = [db.execute("select * from cards where cardid = ?", (x.cardid,)).fetchone() for x in deck_cards]
@@ -128,7 +128,7 @@ def get_card(cardid: int):
 @app.post('/transclude/<deckid>')
 def transclude(deckid: int):
     auth()
-
+    return ""
 
 @app.post('/new-card')
 def new_card():
@@ -214,6 +214,40 @@ def del_card(deckid: int, cardid: int):
 def card_preview(cardid: int):
     card = Card.query(cardid)
     return render_template('card-preview.html', card=card)
+
+@app.post('/include/<cardid>')
+def post_include(cardid: int):
+    """Handler to add existing card to existing deck"""
+    ref = request.referrer
+    # slightly less stupid way to get deckid from referrer?
+    deckid = [int(s) for s in ref.split('/')[-1] if s.isdigit()][0]
+
+    try: # return nothing if card already in deck
+        Deck_Cards.order(cardid, deckid)
+        return ""
+    except: # card not already in deck
+        Deck_Cards.new(cardid, deckid)
+
+    deck = Deck.query(deckid)
+    card = Card.query(cardid)
+    return render_template('card-s.html', card=card, deck=deck, get_order = Deck_Cards.order, deckid=deckid)
+
+@app.post('/search')
+def get_search():
+    # my brain is fried this feels ridiculous but it stays for now
+    cards = db.execute('select * from cards').fetchall()
+    # list of all cards
+    card_objs = [Card(*row) for row in cards]
+    # make dict with card name as key to get Cards in sorted order
+    card_objs = {x.name: x for x in card_objs}
+    # list of just card names
+    card_names = [x[1] for x in cards]
+    # sorted names
+    fuzzy_search = process.extract(request.form['search'], card_names, limit=10)
+    # sorted Card objects
+    sorted_cards = [card_objs[x[0]] for x in fuzzy_search]
+
+    return render_template('search-results.html', cards=sorted_cards)
 
 @app.route('/')
 def index():

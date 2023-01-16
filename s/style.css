@@ -415,3 +415,34 @@ details.dropdown > :last-child {
 .error {
   color: red;
 }
+
+.search-wrapper {
+  position: fixed;
+  border: 1px solid grey;
+  left: 50vw;
+  top: 25vh;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  border-radius: 2px;
+  background: #eee;
+}
+
+.card-search {
+  width: -moz-available;
+  padding: 5px;
+  margin: 5px;
+}
+
+.search-result {
+  background: ;
+  padding: 5px;
+  display: inline-block;
+  width: -moz-available;
+  color: black;
+}
+
+@media (min-width: 750px) {
+  .search-wrapper {
+    width:500px;
+  }
+}
