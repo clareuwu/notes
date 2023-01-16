@@ -416,6 +416,10 @@ details.dropdown > :last-child {
   color: red;
 }
 
+hr {
+  border-top: 1px;
+}
+
 .search-wrapper {
   position: fixed;
   border: 1px solid grey;
