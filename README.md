@@ -54,6 +54,7 @@ inside card textarea:
 # To do
 - maybe: some kind of publish feature to turn decks into blog posts, cards being separated sections
 - [ ] Inline search box when transcluding cards/images/files
+- [ ] way to reorder cards in deck
 - [x] Add transclude for cards in other cards
 - [x] Add include existing card in current deck
 - [ ] Add transclude images inside cards
