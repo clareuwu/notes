@@ -23,7 +23,7 @@ To install requirements and initialize db:
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python db.py # set up db tables
+python db.py
 ```
 
 Then add yourself a user: `python add_user.py <username> <password>`, replacing `<username>` and `<password>` with your own desired account info.
