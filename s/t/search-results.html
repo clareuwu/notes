@@ -1,0 +1,9 @@
+{% for card in cards %}
+<a href="#"
+  hx-post="/include/{{card.cardid}}"
+  hx-swap="afterbegin"
+  hx-target="#cards"
+  class="search-result">
+  {{card.name}} - {{card.cardid}}
+</a>
+{% endfor %}
