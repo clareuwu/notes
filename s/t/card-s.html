@@ -16,11 +16,12 @@
     })
     console.log('rendering katex');
     const wikilinks = document.querySelectorAll('#id{{card.cardid}} .wikilink');
-    wikilinks.forEach(async link => {p = await fetch('/card-preview/'+link.href.split('/')[4]).then(r=>r.text());
-      const preview = document.createElement('div')
-      link.insertAdjacentElement('afterend', preview)
-      preview.outerHTML = p
-    })
+    // TODO: add alpine attributes to only show these on hover.
+    //wikilinks.forEach(async link => {p = await fetch('/card-preview/'+link.href.split('/')[4]).then(r=>r.text());
+      //const preview = document.createElement('div')
+      //link.insertAdjacentElement('afterend', preview)
+      //preview.outerHTML = p
+    //})
     "
   {% if deck %}
   order="{{ get_order(card.cardid, deckid) }}"
