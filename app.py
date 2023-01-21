@@ -167,6 +167,7 @@ def get_cse(cardid: int):
     if 'd' in ref:
         deckid = ref[-1]
         deckid = ''.join(c for c  in deckid if c.isdigit()) # because i can not think of a less moronic way to get the deckid somehow if theres params in the url
+    print('card content = '+card.content)
     return render_template('card-s-edit.html', card=card, deckid=deckid, get_order=Deck_Cards.order)
 
 @app.put('/cse/<cardid>')

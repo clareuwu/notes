@@ -1,8 +1,11 @@
-<textarea id="{{card.cardid}}box"
+<div contenteditable="true"
+  class="textarea no-search"
+  style="width:auto;height:auto;border:1px solid black;background:white;padding:5px;word-wrap:break-word;white-space:pre-wrap;"
+  id="{{card.cardid}}box"
+  x-ref="textbox"
+  x-init="console.log($el);document.execCommand('defaultParagraphSeparator', false, 'p');$el.innerHTML=`{{card.content|safe}}`;console.log(`{{card.content}}`)"
   name="content"
-  style="width: 100%; resize: none; height: 41px;tab-size:2;"
-  oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + 5 + &quot;px&quot;"
-  x-init="$nextTick(() => {$el.style.height = &quot;&quot;;$el.style.height = $el.scrollHeight + 5 + &quot;px&quot;});"
+  style="width: 100%; resize: none; height: fit-content;tab-size:2;"
   @keydown.tab.prevent="
     console.log('tabbed')
     $el.setRangeText(
@@ -14,4 +17,5 @@
   @keydown.escape.prevent="document.getElementById('{{card.cardid}}-save').click()"
   @keydown.cmd.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
   @keydown.shift.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
-  >{{ card.content }}</textarea>
+  @keydown.enter.prevent="document.execCommand('insertLineBreak')"
+  ></div>

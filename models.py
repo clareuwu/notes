@@ -104,6 +104,8 @@ class Card:
         # markdown = md.markdown(self.content,
         #               extensions=[WikiLinkExtension(build_url=url_builder), 'fenced_code', 'codehilite'])
         markdown = md.markdown(self.content, extensions=['fenced_code', 'codehilite'])
+        print(markdown)
+        print('content = '+self.content)
         wikilinks_regex = re.compile(r'\[\[([\w\-\s]*)\|?([\w\-\s]*)?\]\]')
         markdown = wikilinks_regex.sub(regex_url_builder, markdown)
         return md.markdown(markdown)

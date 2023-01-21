@@ -107,15 +107,15 @@ input {
   margin-left: 5px;
 }
 
-.card p {
+.card p, .card-edit p {
   margin-top: 10px;
   margin-bottom: 0px;
 }
-.card *:first-child {
+.card *:first-child, .card-edit *:first-child {
   margin-top: 0;
 }
 
-.card *:last-child  {
+.card *:last-child, .card-edit *:last-child {
   margin-bottom: 0;
 }
 

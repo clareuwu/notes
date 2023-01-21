@@ -3,9 +3,9 @@
   order="{{ get_order(card.cardid, deckid) }}"
   {% endif %}
   class="note-card">
-  <form hx-put="/cse/{{card.cardid}}" hx-target="#id{{card.cardid}}" hx-swap="outerHTML">
+  <form hx-put="/cse/{{card.cardid}}" hx-target="#id{{card.cardid}}" hx-swap="outerHTML" @submit="$refs.textarea.textContent=$refs.textbox.innerText">
   <header class="card-header">
-    <input class="edit-s-title {% if not deckid %}hidden{% endif %}" value="{{ card.name }}" name="name">
+    <input class="no-search edit-s-title {% if not deckid %}hidden{% endif %}" value="{{ card.name }}" name="name">
     <div class="card-meta" style="">
       {{ card.isoformat() }}
       |
@@ -20,6 +20,7 @@
   <div class="error">{{ error}}</div>
   {% endif %}
   <div class="card-edit">
+    <textarea name="content" x-ref="textarea" style="display:none"></textarea>
     {% include "textbox.html" %}
   </div>
   </form>
