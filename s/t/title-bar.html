@@ -38,7 +38,7 @@
 <div x-data="{showSearch: false, trap: false}" x-show="showSearch"
     x-cloak
     x-trap="trap"
-    @keydown.shift.s.document="if(!['textarea','input'].includes($event.target.localName))
+    @keydown.shift.s.document="if(!$event.target.classList.contains('no-search'))
                                    {showSearch=!showSearch; trap=!trap}"
     @click.outside="showSearch=false; trap=false;"
     @keydown.escape.document="showSearch=false; trap=false;"
