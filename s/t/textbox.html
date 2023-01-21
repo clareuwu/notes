@@ -3,7 +3,7 @@
   style="width:auto;height:auto;border:1px solid black;background:white;padding:5px;word-wrap:break-word;white-space:pre-wrap;"
   id="{{card.cardid}}box"
   x-ref="textbox"
-  x-init="console.log($el);document.execCommand('defaultParagraphSeparator', false, 'p');$el.innerHTML=`{{card.content|safe}}`;console.log(`{{card.content}}`)"
+  x-init="document.execCommand('defaultParagraphSeparator', false, 'p');"
   name="content"
   style="width: 100%; resize: none; height: fit-content;tab-size:2;"
   @keydown.tab.prevent="
@@ -18,4 +18,4 @@
   @keydown.cmd.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
   @keydown.shift.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
   @keydown.enter.prevent="document.execCommand('insertLineBreak')"
-  ></div>
+  >{{card.content|safe}}</div>
