@@ -64,7 +64,7 @@ def post_login():
 def get_notes():
     """Handler for GET requests to /notes"""
     auth()
-    return render_template('notes.html', title = f"gm {session['username']}", decks = home_decks(10))
+    return render_template('notes.html', title = f"gm {session['username']}", decks = home_decks(100))
 
 @app.route('/d/<deckid>')
 def get_deck(deckid: int):
