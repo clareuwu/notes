@@ -105,6 +105,14 @@ tr {
   border-bottom: 1px solid gray;
 }
 
+tr > :first-child {
+  padding-right: 20px;
+}
+
+tr > :last-child {
+  padding-left: 20px;
+}
+
 th, td {
   padding: 6px;
 }
