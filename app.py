@@ -193,7 +193,7 @@ def put_cse(cardid: int):
 
     try:
         card.update()
-        deck.update() # update last edited time when editing cards inside deck
+        if deck: deck.update() # update last edited time when editing cards inside deck
     except sqlite3.IntegrityError:
         card = Card.query(cardid)
         return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Card name already in use')
