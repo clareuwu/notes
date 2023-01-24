@@ -85,6 +85,23 @@ input {
   margin: auto;
 }
 
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+tr {
+  border-bottom: 1px solid gray;
+}
+
+th, td {
+  padding: 6px;
+}
+
+.textarea { 
+  tab-size: 2;
+}
+
 .card {
   padding: 5px;
   background: white;
@@ -95,6 +112,9 @@ input {
 
 .card * {
   word-wrap: break-word;
+}
+.card h1 {
+  margin-top:1 !important;
 }
 .note-card {
   margin-top: 10px;
@@ -471,7 +491,7 @@ span.linenos { color: inherit; background-color: transparent; padding-left: 5px;
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .codehilite .hll { background-color: #ffffcc }
-.codehilite { background: #f8f8f8; border: 1px solid lightgrey; padding: 2px;}
+.codehilite { background: #f8f8f8; border: 1px solid lightgrey; padding: 2px; margin-top: 1rem; }
 .codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
 .codehilite .err { border: 1px solid #FF0000 } /* Error */
 .codehilite .k { color: #008000; font-weight: bold } /* Keyword */
