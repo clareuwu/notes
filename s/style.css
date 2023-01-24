@@ -18,7 +18,7 @@
 
   --nav-bg: #5a5a5a;
   --nav-divider: #ffffff;
-  --nav-color: #ffffff
+  --nav-color: #ffffff;
 }
 
 html {
@@ -63,14 +63,6 @@ h1+p,h2+p,h3+p,h4+p,h5+p,h6+p{
 
 p+h1,p+h2,p+h3,p+h4,p+h5,p+h6 {
   margin-top: 10px;
-=======
-}
-
-h1+p,h2+p,h3+p,h4+p,h5+p,h6+p{
-}
-
-p+h1,p+h2,p+h3,p+h4,p+h5,p+h6 {
->>>>>>> 45e4da12514252dccf214bc93f8f7da5cef2a94c
 }
 
 button {
@@ -100,17 +92,16 @@ table {
   margin: auto;
 }
 
-
 tr {
   border-bottom: 1px solid gray;
 }
 
 tr > :first-child {
-  padding-right: 20px;
+  padding-right: 40px;
 }
 
 tr > :last-child {
-  padding-left: 20px;
+  padding-left: 40px;
 }
 
 th, td {
