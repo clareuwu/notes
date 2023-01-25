@@ -60,7 +60,7 @@ em {
 }
 
 .selected-card {
-  border: 2px solid var(--accent-color) !important;
+  border: 1px solid var(--accent-color) !important;
 }
 
 .card h1 {
