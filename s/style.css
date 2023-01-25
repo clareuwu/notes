@@ -90,6 +90,7 @@ button {
 p > code, li > code {
   background: #f8f8f8;
   border: 1px solid lightgray;
+  border-radius: 2px;
 }
 
 img {
