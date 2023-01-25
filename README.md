@@ -46,6 +46,7 @@ outside text inputs:
 - `shift-d`: new deck
 - `shift-c`: new card
 - `shift-s`: search bar for including cards into decks
+- `shift-e`: with a card clicked, opens edit card
 
 inside card textarea:
 - `escape`, `cmd-enter`, `shift-enter`: save content
