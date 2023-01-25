@@ -69,9 +69,9 @@ button {
   font-family: Arial;
 }
 
-code {
+p > code {
   background: black;
-  color: #14ff00;
+  color: white;
 }
 
 img {
