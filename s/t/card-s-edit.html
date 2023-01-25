@@ -2,8 +2,12 @@
   {% if deckid %}
   order="{{ get_order(card.cardid, deckid) }}"
   {% endif %}
+  x-data="{content: ''}"
   class="note-card">
-  <form hx-put="/cse/{{card.cardid}}" hx-target="#id{{card.cardid}}" hx-swap="outerHTML" @submit="$refs.textarea.textContent=$refs.textbox.innerText">
+  <form hx-put="/cse/{{card.cardid}}"
+    hx-target="#id{{card.cardid}}"
+    hx-swap="outerHTML"
+    @submit="content = document.getElementById('{{card.cardid}}box').innerText">
   <header class="card-header">
     <input class="no-search edit-s-title {% if not deckid %}hidden{% endif %}" value="{{ card.name }}" name="name">
     <div class="card-meta" style="">
@@ -19,8 +23,8 @@
   {% if error %}
   <div class="error">{{ error}}</div>
   {% endif %}
-  <div class="card-edit">
-    <textarea name="content" x-ref="textarea" style="display:none"></textarea>
+  <div class="card-edit" >
+    <textarea name="content" x-model="content" style="display:none"></textarea>
     {% include "textbox.html" %}
   </div>
   </form>
