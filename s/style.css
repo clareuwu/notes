@@ -91,6 +91,8 @@ p > code, li > code {
   background: #f8f8f8;
   border: 1px solid lightgray;
   border-radius: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 img {
