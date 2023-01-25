@@ -70,8 +70,7 @@ button {
 }
 
 p > code {
-  background: black;
-  color: white;
+  background: lightgray;
 }
 
 img {
