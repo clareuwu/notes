@@ -2,7 +2,17 @@
 {% block body %}
 
 {% include "title-bar.html" %}
-<div id="cards">
+<div x-data="{selected: 0, editBtn: 0,
+               checkTarget(e) {return !e.target.classList.contains('no-search')}}"
+  @keydown.shift.e.document="
+  console.log('edit'+selected);
+  if(selected && checkTarget($event)) {
+    document.getElementById(editBtn).click()
+  }
+  selected = 0;
+  editBtn = 0;"
+  id="cards">
+
 {% for card in cards|reverse %}
   {% include "card-s.html" %}
 {% endfor %}

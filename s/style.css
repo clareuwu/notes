@@ -19,6 +19,8 @@
   --nav-bg: #5a5a5a;
   --nav-divider: #ffffff;
   --nav-color: #ffffff;
+
+  --accent-color: coral;
 }
 
 html {
@@ -50,11 +52,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 strong {
-  color: coral;
+  color: var(--accent-color);
 }
 
 em {
-  color: #ff713a;
+  color: var(--accent-color);
+}
+
+.selected-card {
+  border: 2px solid var(--accent-color) !important;
 }
 
 .card h1 {
