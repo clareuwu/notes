@@ -221,7 +221,7 @@ def post_include(cardid: int):
     """Handler to add existing card to existing deck"""
     ref = request.referrer
     # slightly less stupid way to get deckid from referrer?
-    deckid = [int(s) for s in ref.split('/')[-1] if s.isdigit()][0]
+    deckid = ''.join([s for s in ref.split('/')[-1] if s.isdigit()])
 
     try: # return nothing if card already in deck
         Deck_Cards.order(cardid, deckid)
