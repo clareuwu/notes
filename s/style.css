@@ -153,6 +153,7 @@ th, td {
   /* box-shadow: 0 1px 3px grey; */
   border: 1px solid grey;
   line-height: 1.3;
+  border-radius: 0.25rem;
 }
 
 .card * {
@@ -356,6 +357,7 @@ details.dropdown > :last-child {
   padding-top: 7px;
   padding-bottom: 7px;
   border: 1px solid black;
+  border-radius: 0.25rem;
 }
 
 .page-frame {
