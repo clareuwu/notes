@@ -17,7 +17,7 @@
         'end'
       )"
   @keydown.escape.prevent="document.getElementById('{{card.cardid}}-save').click()"
-  @keydown.cmd.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
-  @keydown.shift.enter.prevent="document.getElementById('{{card.cardid}}-save').click()"
+  @keydown.cmd.enter.stop.prevent="document.getElementById('{{card.cardid}}-save').click()"
+  @keydown.shift.enter.stop.prevent="document.getElementById('{{card.cardid}}-save').click()"
   @keydown.enter.prevent="document.execCommand('insertLineBreak')"
   >{{card.content|safe}}</div>

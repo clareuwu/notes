@@ -60,7 +60,8 @@ em {
 }
 
 .selected-card {
-  border: 1px solid black !important;
+  border: 1px solid gray !important;
+  box-shadow: 0 0 3px #00000094;
 }
 
 .card h1 {
@@ -98,6 +99,7 @@ blockquote {
   border: 1px solid var(--accent-color);
   border-left: 5px solid var(--accent-color);
   margin: 1rem;
+  border-radius: 0.25rem;
 }
 
 blockquote > * {
