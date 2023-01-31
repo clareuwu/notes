@@ -208,17 +208,20 @@ def put_cse(cardid: int):
 @app.delete('/csd/<deckid>/<cardid>')
 def del_card(deckid: int, cardid: int):
     """Removes a card from a deck"""
+    auth()
     Deck_Cards.delete(cardid, deckid)
     return ''
 
 @app.route('/card-preview/<cardid>')
 def card_preview(cardid: int):
+    auth()
     card = Card.query(cardid)
     return render_template('card-preview.html', card=card)
 
 @app.post('/include/<cardid>')
 def post_include(cardid: int):
     """Handler to add existing card to existing deck"""
+    auth()
     ref = request.referrer
     # slightly less stupid way to get deckid from referrer?
     deckid = ''.join([s for s in ref.split('/')[-1] if s.isdigit()])
@@ -235,6 +238,7 @@ def post_include(cardid: int):
 
 @app.post('/search')
 def get_search():
+    auth()
     # my brain is fried this feels ridiculous but it stays for now
     if request.form['search'] == '': return ''
     cards = db.execute('select * from cards').fetchall()
