@@ -21,6 +21,7 @@
   --nav-color: #ffffff;
 
   --accent-color: coral;
+  --code-color: #d14;
 }
 
 html {
@@ -93,6 +94,7 @@ p > code, li > code {
   border-radius: 2px;
   padding-left: 2px;
   padding-right: 2px;
+  color: var(--code-color);
 }
 
 blockquote {
