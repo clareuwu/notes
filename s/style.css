@@ -1,10 +1,11 @@
 :root {
-  --page-pagebody: #6b6c67;
+  /* --page-pagebody: #6b6c67; */
+  --page-pagebody: #282828;
   --page-pageframe: #c3bdb4;
   --page-pagecontent: #eee;
   --page-log-border: #808080;
   --page-log-bg: #eee;
-  --page-links: #0000ee;
+  --page-links: #ceefff;
   --page-links-visited: #6300c0;
   --page-nav-divider: #000000;
   --page-nav-meta: #535353;
@@ -13,15 +14,16 @@
   --grid-gutter: 2rem;
 
   --font-family-ui: ;
-  --font-default: #000000;
+  --font-default: #fbf1c7;
   --font-size: 1rem;
 
   --nav-bg: #5a5a5a;
   --nav-divider: #ffffff;
-  --nav-color: #ffffff;
+  --nav-color: white;
 
   --accent-color: coral;
   --code-color: #d14;
+  --text-color: #fbf1c7;
 }
 
 html {
@@ -52,6 +54,18 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+h1 {
+  color: #FABD2F;
+}
+
+h2 {
+  color: #CC241D;
+}
+
+h3, h4, h5, h6 {
+  color: #fabd2f;
+}
+
 strong {
   color: var(--accent-color);
 }
@@ -61,8 +75,8 @@ em {
 }
 
 .selected-card {
-  border: 1px solid gray !important;
-  box-shadow: 0 0 3px #00000094;
+  border: 1px solid #d9d9d9 !important;
+  /* box-shadow: 0 0 3px #00000094; */
 }
 
 .card h1 {
@@ -86,15 +100,19 @@ h1+p,h2+p,h3+p,h4+p,h5+p,h6+p{
 
 button {
   font-family: Arial;
+  background: darkgray;
+  border-radius: 2px;
 }
 
 p > code, li > code {
-  background: #f8f8f8;
+  /* background: #f8f8f8; */
+  background: #222;
   border: 1px solid lightgray;
   border-radius: 2px;
   padding-left: 2px;
   padding-right: 2px;
-  color: var(--code-color);
+  /* color: var(--code-color); */
+  color: cadetblue;
 }
 
 blockquote {
@@ -153,7 +171,8 @@ th, td {
 
 .card {
   padding: 5px;
-  background: white;
+  /* background: white; */
+  background: var(--page-pagebody);
   /* box-shadow: 0 1px 3px grey; */
   border: 1px solid grey;
   line-height: 1.4;
@@ -192,6 +211,8 @@ th, td {
   margin-left: 0px;
   margin-right: 0px;
   width: 50%;
+  background: var(--page-pagebody);
+  color: white;
 }
 
 .edit-s-select {
@@ -206,6 +227,7 @@ th, td {
 }
 
 .card p, .card-edit p {
+ color: var(--text-color);
 }
 
 .card *:first-child, .card-edit *:first-child {
@@ -218,14 +240,16 @@ th, td {
 
 .card ul {
   padding-left: 20px;
+  color: var(--text-color);
 }
 
 .card li {
   margin-bottom: 0.75rem;
+  color: var(--text-color)
 }
 
 .card ol {
-  padding-left: 1.5rem;
+  padding-left: 2rem;
 }
 
 .card header > * {
@@ -285,7 +309,8 @@ details.dropdown > :last-child {
   align-items: stretch;
   background-color: var(--nav-bg);
   padding: 0;
-  max-width: var(--grid-maxwidth);
+  /* max-width: var(--grid-maxwidth); */
+  max-width: 650px;
   margin: auto;
 }
 
@@ -362,22 +387,24 @@ details.dropdown > :last-child {
   max-width: var(--grid-maxwidth);
   margin: 0 auto;
   width: 100%;
-  padding: 0 calc(var(--grid-gutter) / 2);
+  padding: 0 calc(var(--grid-gutter) / 3);
 }
 
 .page-content {
-  background-color: #eee;
+  /* background-color: #eee; */
+  background-color: #2f2f2f;
   max-width: 650px;
   padding-top: 7px;
   padding-bottom: 7px;
-  border: 1px solid black;
-  border-radius: 0.25rem;
+  /* border: 1px solid black; */
+  border: 1px solid #484848;
+  /* border-radius: 0.25rem;  */
 }
 
 .page-frame {
   padding-top: 7px;
   padding-bottom: 23px;
-  background-color: var(--page-pageframe);
+  /* background-color: var(--page-pageframe); */
 }
 
 .row {
@@ -558,13 +585,16 @@ hr {
 code * {
   white-space: pre-wrap;
 }
+code {
+  color: cadetblue;
+}
 pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.codehilite .hll { background-color: #ffffcc }
-.codehilite { background: #f8f8f8; border: 1px solid lightgrey; padding: 2px; margin-top: 1rem; }
+.codehilite .hll { background-color: #ffffc0 }
+.codehilite { background: #222 ; border: 1px solid lightgrey; padding: 2px; margin-top: 1rem; }
 .codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
 .codehilite .err { border: 1px solid #FF0000 } /* Error */
 .codehilite .k { color: #008000; font-weight: bold } /* Keyword */
