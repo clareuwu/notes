@@ -1,6 +1,14 @@
-Little notes app I'm making since I'm not happy with any other note taking/knowledge base apps, complete WIP.
+Little notes app I'm making since I'm not happy with any other note taking/knowledge base apps, WIP. Inspired by Obsidian.md mostly. 
 
 Made with Flask, htmx, Alpine.js. Uses local sqlite3 db for persistence.
+
+Example preview:
+
+<p align="center">
+<img width="80%" align="center" alt="image" src="https://user-images.githubusercontent.com/87212918/217326853-e517f336-9eec-4da7-b57d-606cb6101c81.png">
+</p>
+
+---
 
 `app.py` flask app, routing, auth/cookie stuff
 
