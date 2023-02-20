@@ -180,10 +180,12 @@ def put_cse(cardid: int):
         deck = Deck.query(deckid)
 
     card = Card.query(cardid)
-    new_name_card = db.execute('select name from cards where name = ?', (request.form['name'].strip(),)).fetchone()
-    new_name_card = new_name_card
-    if new_name_card and new_name_card[0].lower() != request.form['name'].strip().lower():
+    new_name = request.form['name'].strip().lower()
+    card_name = db.execute('select name from cards where name = ?', (new_name,)).fetchone()
+
+    if card_name and card_name[0].lower() == new_name:
         return render_template('card-s-edit.html', deck=deck, card=card, deckid=deckid, get_order=Deck_Cards.order, error='Card name already in use')
+
     card.name = request.form['name']
     card.content = request.form['content']
 
