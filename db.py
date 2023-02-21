@@ -10,7 +10,6 @@ def make_table_wrapper(query: str, table: str = None, drop: bool = False):
 
 def create_users_table(drop = False):
     """Create table containing user info"""
-    con.execute('PRAGMA foreign_keys = ON;')
     make_table_wrapper('''create table users(
         userid integer primary key,
         username text unique not null,
